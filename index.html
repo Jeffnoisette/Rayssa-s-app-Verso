@@ -76,6 +76,69 @@
     @media(max-width:767px){
       .desktop-sidebar{display:none!important}
     }
+
+    /* ── Dark Mode ── */
+    .dark body,.dark{background:#0f1117}
+    .dark .bg-canvas{background:#15171e!important}
+    .dark .bg-white{background:#1c1f2a!important}
+    .dark .bg-stone-50{background:#22252f!important}
+    .dark .bg-stone-100{background:#282b36!important}
+    .dark .bg-stone-200{background:#323642!important}
+    .dark .text-ink,.dark .text-ink-DEFAULT{color:#e4e4e7!important}
+    .dark .text-ink-light{color:#a1a1aa!important}
+    .dark .text-ink-muted{color:#71717a!important}
+    .dark .text-ink-faint{color:#52525b!important}
+    .dark .border-stone-100{border-color:#282b36!important}
+    .dark .border-stone-200{border-color:#323642!important}
+    .dark .border-b{border-color:#282b36!important}
+    .dark .divide-stone-100>*+*{border-color:#282b36!important}
+    .dark .shadow-sm{box-shadow:0 1px 3px rgba(0,0,0,.4)!important}
+    .dark .shadow-lg{box-shadow:0 4px 15px rgba(0,0,0,.5)!important}
+    .dark input,.dark textarea{background:#22252f!important;color:#e4e4e7!important;border-color:#323642!important}
+    .dark input::placeholder,.dark textarea::placeholder{color:#52525b!important}
+    .dark .skeleton{background:linear-gradient(90deg,#282b36 25%,#323642 50%,#282b36 75%)!important;background-size:200% 100%;animation:shimmer 1.5s infinite}
+    .dark .bg-accent-50{background:#1e2a3d!important}
+    .dark .border-accent-100{border-color:#253554!important}
+    .dark .bg-red-50{background:#2d1f1f!important}
+    .dark .text-red-500{color:#f87171!important}
+    .dark .hover-lift:hover{box-shadow:0 8px 25px rgba(0,0,0,.3)!important}
+    .dark .mobile-nav{background:#1c1f2a!important;border-color:#282b36!important}
+    .dark .mobile-header{background:#0f1117!important}
+    /* Dark: titles & headings */
+    .dark .text-navy-500{color:#93c5fd!important}
+    .dark .font-display{color:#e4e4e7!important}
+    .dark h1,.dark h2,.dark h3,.dark p.font-semibold,.dark p.font-bold{color:#e4e4e7}
+    /* Dark: stone text colors */
+    .dark .text-stone-300{color:#a1a1aa!important}
+    .dark .text-stone-400{color:#8b8b96!important}
+    .dark .text-stone-500{color:#71717a!important}
+    .dark .text-stone-600{color:#a1a1aa!important}
+    .dark .text-stone-700{color:#d4d4d8!important}
+    /* Dark: tab & button text */
+    .dark .text-ink-faint.hover\:text-ink-muted:hover{color:#a1a1aa!important}
+    .dark .text-white\/70{color:rgba(228,228,231,.7)!important}
+    /* Dark: specific component overrides */
+    .dark .bg-amber-100{background:#3d3520!important}
+    .dark .text-amber-700{color:#fbbf24!important}
+    .dark .bg-purple-100{background:#2d2040!important}
+    .dark .text-purple-700{color:#c084fc!important}
+    .dark .bg-accent-100{background:#1e2a3d!important}
+    .dark .text-accent-700{color:#60a5fa!important}
+    .dark .bg-red-100{background:#2d1f1f!important}
+    .dark .text-red-600{color:#f87171!important}
+    .dark .bg-emerald-100{background:#1a2e25!important}
+    .dark .text-emerald-700{color:#34d399!important}
+    .dark .shadow-2xl{box-shadow:none!important}
+    /* Dark: chat bubbles */
+    .dark .bg-white.text-ink.border-stone-100{background:#22252f!important}
+    /* Dark: toggle knob */
+    .dark .bg-stone-200 div,.dark button[class*="bg-stone-200"] div{background:#e4e4e7!important}
+    @media(min-width:768px){
+      .dark .desktop-sidebar{background:#1c1f2a!important;border-color:#282b36!important}
+      .dark .desktop-sidebar .nav-item{color:#a1a1aa}
+      .dark .desktop-sidebar .nav-item:hover{background:#22252f;color:#e4e4e7}
+      .dark .desktop-sidebar .nav-item.active{background:#1e2a3d;color:#60a5fa}
+    }
   </style>
 </head>
 <body>
@@ -281,10 +344,22 @@
 
     /* ═══════ SCREEN: HOME ═══════ */
     const Home = () => {
-      const {tab,setTab,feedPosts,go}=useApp();
+      const {tab,setTab,feedPosts,go,setPostBook}=useApp();
       const [heroIdx,setHeroIdx]=useState(0);
+      const [fabVisible,setFabVisible]=useState(true);
+      const lastScrollY=useRef(0);
       const heroBooks=[books[0],books[3],books[11],books[17]];
       useEffect(()=>{const t=setInterval(()=>setHeroIdx(i=>(i+1)%heroBooks.length),5000);return ()=>clearInterval(t)},[]);
+      useEffect(()=>{
+        const onScroll=()=>{
+          const y=window.scrollY;
+          if(y>lastScrollY.current&&y>80)setFabVisible(false);
+          else setFabVisible(true);
+          lastScrollY.current=y;
+        };
+        window.addEventListener('scroll',onScroll,{passive:true});
+        return ()=>window.removeEventListener('scroll',onScroll);
+      },[]);
       const hb=heroBooks[heroIdx];
       return (
         <div className="pb-20 md:pb-4 relative anim-fade">
@@ -326,6 +401,14 @@
             ))}
           </div>
           <div className="p-4">{feedPosts.map((p,i)=><PostCard key={p.id} p={p} delay={i*.06}/>)}</div>
+          {/* FAB */}
+          <div className={`fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 transition-all duration-300 ${fabVisible?'translate-y-0 opacity-100':'translate-y-20 opacity-0 pointer-events-none'}`}>
+            <button onClick={()=>{setPostBook(null);go('post')}} className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95" style={{background:'linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%)',boxShadow:'0 4px 15px rgba(37,99,235,.4)'}}>
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{boxShadow:'0 8px 30px rgba(37,99,235,.5)'}}/>
+              <span className="absolute inset-0 rounded-full animate-ping opacity-20 bg-accent-400" style={{animationDuration:'2.5s'}}/>
+              <I name="plus" size={24} className="text-white relative z-10 transition-transform duration-300 group-hover:rotate-90"/>
+            </button>
+          </div>
         </div>
       );
     };
@@ -716,8 +799,7 @@
 
     /* ═══════ SCREEN: SETTINGS ═══════ */
     const Settings = () => {
-      const {goBack}=useApp();
-      const [darkMode,setDarkMode]=useState(false);
+      const {goBack,darkMode,toggleDark}=useApp();
       const [pushNotifs,setPushNotifs]=useState(true);
       const [spoilerWarn,setSpoilerWarn]=useState(true);
       const Toggle=({on,onToggle})=>(
@@ -749,7 +831,7 @@
               <p className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider pt-4 pb-2">Preferências</p>
               <Item icon="bell" label="Notificações Push" desc="Receber alertas no celular"><Toggle on={pushNotifs} onToggle={()=>setPushNotifs(!pushNotifs)}/></Item>
               <Item icon="eye-off" label="Aviso de Spoiler" desc="Ocultar conteúdo com spoilers"><Toggle on={spoilerWarn} onToggle={()=>setSpoilerWarn(!spoilerWarn)}/></Item>
-              <Item icon="moon" label="Modo Escuro" desc="Em breve"><Toggle on={darkMode} onToggle={()=>setDarkMode(!darkMode)}/></Item>
+              <Item icon="moon" label="Modo Escuro" desc="Alternar tema claro/escuro"><Toggle on={darkMode} onToggle={toggleDark}/></Item>
             </div>
             <div className="bg-white rounded-2xl px-4 border border-stone-100 shadow-sm mt-4 anim-slide-up anim-d2">
               <p className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider pt-4 pb-2">Sobre</p>
@@ -770,7 +852,9 @@
       return (
         <div className="min-h-screen pb-20 md:pb-4 anim-fade">
           <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-stone-200 sticky top-0 z-40">
-            <button onClick={goBack} className="text-ink-light press"><I name="arrow-left" size={20}/></button>
+            <button onClick={goBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 text-ink transition press">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
             <p className="font-semibold text-sm text-ink">Mensagens</p>
             <button className="w-9 h-9 flex items-center justify-center rounded-full bg-accent-50 text-accent-600 press hover:bg-accent-100 transition"><I name="edit-3" size={16}/></button>
           </div>
@@ -828,7 +912,9 @@
         <div className="min-h-screen flex flex-col pb-20 md:pb-4 anim-fade">
           {/* Chat header */}
           <div className="flex items-center gap-3 px-4 py-3 bg-white border-b border-stone-200 sticky top-0 z-40">
-            <button onClick={goBack} className="text-ink-light press"><I name="arrow-left" size={20}/></button>
+            <button onClick={goBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 text-ink transition press">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
             <button onClick={()=>goUser(u)} className="flex items-center gap-3 flex-1 min-w-0">
               <Av name={u.name} size={38}/>
               <div className="min-w-0"><p className="font-semibold text-sm text-ink truncate">{u.name}</p><p className="text-[10px] text-emerald-500 font-medium">online</p></div>
@@ -979,6 +1065,9 @@
       const [spoiler,setSpoiler]=useState(false);
       const [postBook,setPostBook]=useState(null);
       const [postChapter,setPostChapter]=useState('geral');
+      const [darkMode,setDarkMode]=useState(()=>localStorage.getItem('verso-dark')==='true');
+      const toggleDark=useCallback(()=>{setDarkMode(d=>{const v=!d;localStorage.setItem('verso-dark',v);return v})},[]);
+      useEffect(()=>{document.documentElement.classList.toggle('dark',darkMode)},[darkMode]);
       const [viewUser,setViewUser]=useState(null);
       const [feedPosts,setFeedPosts]=useState([
         {id:1,user:users[0],book:books[0],chapter:8,text:'Gente, o capítulo 8 me destruiu completamente. Nunca esperei que o Ryle fosse capaz de algo assim. Estou em choque.',spoiler:true,likes:124,replies:45,time:'2h'},
@@ -1007,7 +1096,7 @@
 
       const updatePost=useCallback((id,newText)=>{setFeedPosts(prev=>prev.map(p=>p.id===id?{...p,text:newText}:p))},[]);
 
-      const ctx={screen,tab,setTab,chapter,setChapter,userChapter,spoiler,setSpoiler,postBook,setPostBook,postChapter,setPostChapter,viewUser,feedPosts,go,goUser,goBack,publishPost,updatePost};
+      const ctx={screen,tab,setTab,chapter,setChapter,userChapter,spoiler,setSpoiler,postBook,setPostBook,postChapter,setPostChapter,viewUser,feedPosts,go,goUser,goBack,publishPost,updatePost,darkMode,toggleDark};
 
       const mainScreens=['home','busca','estante','perfil'];
       const unreadCount=sampleNotifications.filter(n=>!n.read).length;
@@ -1050,15 +1139,6 @@
               {screen==='messages'&&<Messages/>}
               {screen==='chat'&&<Chat/>}
               {screen==='settings'&&<Settings/>}
-              {screen==='home'&&(
-                <div className="sticky bottom-20 md:bottom-4 z-50 flex justify-end px-4 pointer-events-none" style={{marginTop:'-70px'}}>
-                  <button onClick={()=>{setPostBook(null);go('post')}} className="group relative w-14 h-14 rounded-full flex items-center justify-center pointer-events-auto transition-all duration-300 hover:scale-110 active:scale-95" style={{background:'linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%)',boxShadow:'0 4px 15px rgba(37,99,235,.4)'}}>
-                    <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{boxShadow:'0 8px 30px rgba(37,99,235,.5)'}}/>
-                    <span className="absolute inset-0 rounded-full animate-ping opacity-20 bg-accent-400" style={{animationDuration:'2.5s'}}/>
-                    <I name="plus" size={24} className="text-white relative z-10 transition-transform duration-300 group-hover:rotate-90"/>
-                  </button>
-                </div>
-              )}
               <Nav/>
             </div>
           </div>
