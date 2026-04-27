@@ -12,16 +12,17 @@
           colors: {
             surface: '#F8F7F4',
             canvas: '#F1F0ED',
-            navy: { 50: '#eef2ff', 100: '#dde4ff', 200: '#c3cfff', 300: '#a0b0ff', 400: '#7b8aff', 500: '#1a1f3d', 600: '#14182f', 700: '#0f1225', 800: '#0a0d1a', 900: '#050710' },
-            accent: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' },
-            ink: { DEFAULT: '#1a1a1a', light: '#6b6b6b', muted: '#9a9a9a', faint: '#c8c8c8' },
-            warm: { 100: '#fff8f0', 200: '#ffeedd', 300: '#ffdbb8' },
+            navy: { 50:'#eef2ff',100:'#dde4ff',200:'#c3cfff',300:'#a0b0ff',400:'#7b8aff',500:'#1a1f3d',600:'#14182f',700:'#0f1225',800:'#0a0d1a',900:'#050710' },
+            accent: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8' },
+            ink: { DEFAULT:'#1a1a1a', light:'#6b6b6b', muted:'#9a9a9a', faint:'#c8c8c8' },
+            warm: { 100:'#fff8f0',200:'#ffeedd',300:'#ffdbb8' },
             spoiler: '#e74c3c',
           },
           fontFamily: {
-            display: ['"Playfair Display"', 'Georgia', 'serif'],
-            body: ['"Inter"', 'system-ui', 'sans-serif'],
-          }
+            display: ['"Playfair Display"','Georgia','serif'],
+            body: ['"Inter"','system-ui','sans-serif'],
+          },
+          screens: { 'xs':'475px' },
         }
       }
     }
@@ -32,50 +33,91 @@
   <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: #e8e4de; margin: 0; }
-    .font-display { font-family: 'Playfair Display', Georgia, serif; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .hero-gradient { background: linear-gradient(135deg, #1a1f3d 0%, #2d3561 50%, #1a1f3d 100%); }
-    .blob-pattern { background-image: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.1) 0%, transparent 50%); }
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,sans-serif;background:#e8e4de;margin:0}
+    .font-display{font-family:'Playfair Display',Georgia,serif}
+    .no-scrollbar::-webkit-scrollbar{display:none}
+    .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+    .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .hero-gradient{background:linear-gradient(135deg,#1a1f3d 0%,#2d3561 50%,#1a1f3d 100%)}
+    .blob-pattern{background-image:radial-gradient(circle at 20% 80%,rgba(59,130,246,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(59,130,246,.1) 0%,transparent 50%)}
+
+    /* ── Animations ── */
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes slideRight{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+    @keyframes popIn{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    .anim-fade{animation:fadeIn .35s ease-out both}
+    .anim-slide-up{animation:slideUp .4s ease-out both}
+    .anim-slide-right{animation:slideRight .35s ease-out both}
+    .anim-scale{animation:scaleIn .3s ease-out both}
+    .anim-pop{animation:popIn .35s ease-out both}
+    .anim-d1{animation-delay:.05s}.anim-d2{animation-delay:.1s}.anim-d3{animation-delay:.15s}.anim-d4{animation-delay:.2s}.anim-d5{animation-delay:.25s}
+    .skeleton{background:linear-gradient(90deg,#e5e5e5 25%,#f0f0f0 50%,#e5e5e5 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+    .hover-lift{transition:transform .2s,box-shadow .2s}
+    .hover-lift:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
+    .press{transition:transform .1s}.press:active{transform:scale(.97)}
+
+    /* ── Responsive: Desktop sidebar ── */
+    @media(min-width:768px){
+      .app-shell{display:flex;max-width:1024px;margin:0 auto}
+      .desktop-sidebar{display:flex;flex-direction:column;width:220px;min-height:100vh;background:#fff;border-right:1px solid #e5e5e5;position:sticky;top:0;padding:1.5rem 1rem;flex-shrink:0}
+      .desktop-sidebar .nav-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;border-radius:.75rem;font-size:.875rem;font-weight:500;color:#6b6b6b;transition:all .15s;cursor:pointer;margin-bottom:.25rem}
+      .desktop-sidebar .nav-item:hover{background:#f5f5f5;color:#1a1a1a}
+      .desktop-sidebar .nav-item.active{background:#eff6ff;color:#2563eb;font-weight:600}
+      .main-content{flex:1;min-width:0}
+      .mobile-nav{display:none!important}
+      .mobile-header{display:none!important}
+    }
+    @media(max-width:767px){
+      .desktop-sidebar{display:none!important}
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const { useState, useRef, useEffect, createContext, useContext, useCallback } = React;
+    const {useState,useRef,useEffect,createContext,useContext,useCallback} = React;
 
     /* ── Lucide Icon ── */
-    const I = ({ name, size = 20, className = '', fill = false }) => {
-      const ref = useRef(null);
-      useEffect(() => {
-        if (!ref.current) return;
-        ref.current.innerHTML = '';
-        const ic = lucide.icons[name];
-        if (!ic) return;
-        const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
-        s.setAttribute('width', size); s.setAttribute('height', size);
+    const I = ({name,size=20,className='',fill=false}) => {
+      const ref=useRef(null);
+      useEffect(()=>{
+        if(!ref.current)return;
+        ref.current.innerHTML='';
+        const ic=lucide.icons[name];if(!ic)return;
+        const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+        s.setAttribute('width',size);s.setAttribute('height',size);
         s.setAttribute('viewBox','0 0 24 24');
-        s.setAttribute('fill', fill ? 'currentColor' : 'none');
-        s.setAttribute('stroke','currentColor');
-        s.setAttribute('stroke-width','2');
-        s.setAttribute('stroke-linecap','round');
-        s.setAttribute('stroke-linejoin','round');
-        s.innerHTML = ic[0];
-        ref.current.appendChild(s);
-      }, [name, size, fill]);
-      return <span ref={ref} className={`inline-flex items-center justify-center ${className}`} />;
+        s.setAttribute('fill',fill?'currentColor':'none');
+        s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','2');
+        s.setAttribute('stroke-linecap','round');s.setAttribute('stroke-linejoin','round');
+        s.innerHTML=ic[0];ref.current.appendChild(s);
+      },[name,size,fill]);
+      return <span ref={ref} className={`inline-flex items-center justify-center ${className}`}/>;
     };
 
     /* ── Avatar ── */
-    const Av = ({ src, name, size = 36 }) => (
+    const Av = ({src,name,size=36}) => (
       src
-        ? <img src={src} className="rounded-full object-cover flex-shrink-0" style={{ width: size, height: size }} />
-        : <div className="rounded-full flex-shrink-0 bg-navy-500 flex items-center justify-center text-white font-bold" style={{ width: size, height: size, fontSize: size * 0.38 }}>{(name||'V')[0]}</div>
+        ? <img src={src} className="rounded-full object-cover flex-shrink-0" style={{width:size,height:size}}/>
+        : <div className="rounded-full flex-shrink-0 bg-navy-500 flex items-center justify-center text-white font-bold" style={{width:size,height:size,fontSize:size*.38}}>{(name||'V')[0]}</div>
     );
+
+    /* ── Image with skeleton loader ── */
+    const Img = ({src,alt='',className=''}) => {
+      const [loaded,setLoaded]=useState(false);
+      return (
+        <div className={`relative overflow-hidden ${className}`}>
+          {!loaded && <div className="absolute inset-0 skeleton rounded-inherit"/>}
+          <img src={src} alt={alt} className={`w-full h-full object-cover transition-opacity duration-300 ${loaded?'opacity-100':'opacity-0'}`} onLoad={()=>setLoaded(true)}/>
+        </div>
+      );
+    };
 
     /* ══════════════════════════════════ */
     /*        SHARED DATA & CONTEXT      */
@@ -84,120 +126,125 @@
     const useApp = () => useContext(AppCtx);
 
     const users = [
-      { name: 'Ana Beatriz', handle: '@anab_reads', avatar: null, bio: 'Devoradora de romances e defensora de finais felizes.', followers: 1243, following: 312, booksRead: 47, joined: 'Mar 2024' },
-      { name: 'Carlos Mendes', handle: '@carlosm', avatar: null, bio: 'Leitor de ficção científica e fantasia. Se tem dragão, estou dentro.', followers: 876, following: 198, booksRead: 63, joined: 'Jan 2024' },
-      { name: 'Julia Torres', handle: '@jutorres', avatar: null, bio: 'Professora de literatura e eterna apaixonada por clássicos.', followers: 2105, following: 445, booksRead: 112, joined: 'Nov 2023' },
-      { name: 'Rafaela Lima', handle: '@rafa.lit', avatar: null, bio: 'Leitora compulsiva. 3 livros por semana é o mínimo.', followers: 3420, following: 521, booksRead: 89, joined: 'Fev 2024' },
-      { name: 'Lucas Ferreira', handle: '@lucasf', avatar: null, bio: 'Fã de thriller e mistério. Sempre tentando adivinhar o final.', followers: 654, following: 230, booksRead: 38, joined: 'Mai 2024' },
-      { name: 'Mariana Costa', handle: '@maricosta', avatar: null, bio: 'Poetisa e leitora de madrugada. Café e livros são minha vida.', followers: 1890, following: 340, booksRead: 72, joined: 'Dez 2023' },
+      {name:'Ana Beatriz',handle:'@anab_reads',avatar:null,bio:'Devoradora de romances e defensora de finais felizes.',followers:1243,following:312,booksRead:47,joined:'Mar 2024'},
+      {name:'Carlos Mendes',handle:'@carlosm',avatar:null,bio:'Leitor de ficção científica e fantasia. Se tem dragão, estou dentro.',followers:876,following:198,booksRead:63,joined:'Jan 2024'},
+      {name:'Julia Torres',handle:'@jutorres',avatar:null,bio:'Professora de literatura e eterna apaixonada por clássicos.',followers:2105,following:445,booksRead:112,joined:'Nov 2023'},
+      {name:'Rafaela Lima',handle:'@rafa.lit',avatar:null,bio:'Leitora compulsiva. 3 livros por semana é o mínimo.',followers:3420,following:521,booksRead:89,joined:'Fev 2024'},
+      {name:'Lucas Ferreira',handle:'@lucasf',avatar:null,bio:'Fã de thriller e mistério. Sempre tentando adivinhar o final.',followers:654,following:230,booksRead:38,joined:'Mai 2024'},
+      {name:'Mariana Costa',handle:'@maricosta',avatar:null,bio:'Poetisa e leitora de madrugada. Café e livros são minha vida.',followers:1890,following:340,booksRead:72,joined:'Dez 2023'},
     ];
     const books = [
-      { id:1, title:'É Assim que Acaba', author:'Colleen Hoover', cover:'https://covers.openlibrary.org/b/isbn/9781501110368-L.jpg', rating:4.5, readers:'35.2K', chapters:12, genre:'Romance', description:'Uma história sobre o ciclo do amor e da perda, que vai te fazer questionar tudo.' },
-      { id:2, title:'A Biblioteca da Meia-Noite', author:'Matt Haig', cover:'https://covers.openlibrary.org/b/isbn/9780525559474-L.jpg', rating:4.7, readers:'28.1K', chapters:15, genre:'Ficção', description:'Entre a vida e a morte, existe uma biblioteca com infinitas possibilidades.' },
-      { id:3, title:'O Conto da Aia', author:'Margaret Atwood', cover:'https://covers.openlibrary.org/b/isbn/9780385490818-L.jpg', rating:4.6, readers:'19.8K', chapters:18, genre:'Distopia', description:'Um futuro sombrio onde as mulheres perderam todos os direitos.' },
-      { id:4, title:'Torto Arado', author:'Itamar Vieira Junior', cover:'https://covers.openlibrary.org/b/isbn/9786580309318-L.jpg', rating:4.8, readers:'42.5K', chapters:10, genre:'Ficção', description:'Duas irmãs marcadas por um acidente e pelas injustiças do sertão baiano.' },
-      { id:5, title:'A Garota no Trem', author:'Paula Hawkins', cover:'https://covers.openlibrary.org/b/isbn/9781594634024-L.jpg', rating:4.1, readers:'15.3K', chapters:14, genre:'Suspense', description:'Uma passageira de trem testemunha algo chocante que muda tudo.' },
-      { id:6, title:'O Pequeno Príncipe', author:'Antoine de Saint-Exupéry', cover:'https://covers.openlibrary.org/b/isbn/9780156012195-L.jpg', rating:4.9, readers:'120K', chapters:8, genre:'Fantasia', description:'Uma fábula atemporal sobre o que realmente importa na vida.' },
-      { id:7, title:'Dom Casmurro', author:'Machado de Assis', cover:'https://covers.openlibrary.org/b/isbn/9780195103090-L.jpg', rating:4.4, readers:'22.7K', chapters:20, genre:'Clássico', description:'Bentinho conta sua história e o leitor decide: Capitu traiu ou não?' },
-      { id:8, title:'Verity', author:'Colleen Hoover', cover:'https://covers.openlibrary.org/b/isbn/9781538724736-L.jpg', rating:4.3, readers:'31.0K', chapters:16, genre:'Suspense', description:'Uma escritora descobre manuscritos perturbadores da esposa de seu novo interesse.' },
-      { id:9, title:'1984', author:'George Orwell', cover:'https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg', rating:4.7, readers:'55.4K', chapters:23, genre:'Distopia', description:'O Grande Irmão está te observando. A distopia definitiva.' },
-      { id:10, title:'A Revolução dos Bichos', author:'George Orwell', cover:'https://covers.openlibrary.org/b/isbn/9780451526342-L.jpg', rating:4.5, readers:'38.9K', chapters:10, genre:'Ficção', description:'Uma fábula política brilhante sobre poder e corrupção.' },
-      { id:11, title:'Orgulho e Preconceito', author:'Jane Austen', cover:'https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg', rating:4.6, readers:'45.1K', chapters:24, genre:'Romance', description:'Elizabeth Bennet e Mr. Darcy numa das maiores histórias de amor da literatura.' },
-      { id:12, title:'Cem Anos de Solidão', author:'Gabriel García Márquez', cover:'https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg', rating:4.8, readers:'33.6K', chapters:20, genre:'Ficção', description:'A saga épica da família Buendía em Macondo, onde o mágico é real.' },
-      { id:13, title:'O Morro dos Ventos Uivantes', author:'Emily Brontë', cover:'https://covers.openlibrary.org/b/isbn/9780141439556-L.jpg', rating:4.3, readers:'18.4K', chapters:17, genre:'Clássico', description:'Uma história de amor e vingança nos campos selvagens da Inglaterra.' },
-      { id:14, title:'A Culpa é das Estrelas', author:'John Green', cover:'https://covers.openlibrary.org/b/isbn/9780525478812-L.jpg', rating:4.2, readers:'52.8K', chapters:13, genre:'Romance', description:'Dois adolescentes com câncer encontram o amor e o sentido da vida.' },
-      { id:15, title:'O Alquimista', author:'Paulo Coelho', cover:'https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg', rating:4.0, readers:'67.3K', chapters:11, genre:'Fantasia', description:'Uma jornada em busca de um tesouro que revela o verdadeiro sentido dos sonhos.' },
-      { id:16, title:'Crime e Castigo', author:'Fiódor Dostoiévski', cover:'https://covers.openlibrary.org/b/isbn/9780486415871-L.jpg', rating:4.7, readers:'21.2K', chapters:30, genre:'Clássico', description:'Um estudante comete um crime e enfrenta o peso esmagador da culpa.' },
-      { id:17, title:'Fahrenheit 451', author:'Ray Bradbury', cover:'https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg', rating:4.5, readers:'29.7K', chapters:12, genre:'Distopia', description:'Num mundo onde livros são proibidos, um bombeiro começa a questionar tudo.' },
-      { id:18, title:'O Hobbit', author:'J.R.R. Tolkien', cover:'https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg', rating:4.8, readers:'61.5K', chapters:19, genre:'Fantasia', description:'Bilbo Baggins parte numa aventura inesperada com dragões e tesouros.' },
+      {id:1,title:'É Assim que Acaba',author:'Colleen Hoover',cover:'https://covers.openlibrary.org/b/isbn/9781501110368-L.jpg',rating:4.5,readers:'35.2K',chapters:12,genre:'Romance',description:'Uma história sobre o ciclo do amor e da perda, que vai te fazer questionar tudo.'},
+      {id:2,title:'A Biblioteca da Meia-Noite',author:'Matt Haig',cover:'https://covers.openlibrary.org/b/isbn/9780525559474-L.jpg',rating:4.7,readers:'28.1K',chapters:15,genre:'Ficção',description:'Entre a vida e a morte, existe uma biblioteca com infinitas possibilidades.'},
+      {id:3,title:'O Conto da Aia',author:'Margaret Atwood',cover:'https://covers.openlibrary.org/b/isbn/9780385490818-L.jpg',rating:4.6,readers:'19.8K',chapters:18,genre:'Distopia',description:'Um futuro sombrio onde as mulheres perderam todos os direitos.'},
+      {id:4,title:'Torto Arado',author:'Itamar Vieira Junior',cover:'https://covers.openlibrary.org/b/isbn/9786580309318-L.jpg',rating:4.8,readers:'42.5K',chapters:10,genre:'Ficção',description:'Duas irmãs marcadas por um acidente e pelas injustiças do sertão baiano.'},
+      {id:5,title:'A Garota no Trem',author:'Paula Hawkins',cover:'https://covers.openlibrary.org/b/isbn/9781594634024-L.jpg',rating:4.1,readers:'15.3K',chapters:14,genre:'Suspense',description:'Uma passageira de trem testemunha algo chocante que muda tudo.'},
+      {id:6,title:'O Pequeno Príncipe',author:'Antoine de Saint-Exupéry',cover:'https://covers.openlibrary.org/b/isbn/9780156012195-L.jpg',rating:4.9,readers:'120K',chapters:8,genre:'Fantasia',description:'Uma fábula atemporal sobre o que realmente importa na vida.'},
+      {id:7,title:'Dom Casmurro',author:'Machado de Assis',cover:'https://covers.openlibrary.org/b/isbn/9780195103090-L.jpg',rating:4.4,readers:'22.7K',chapters:20,genre:'Clássico',description:'Bentinho conta sua história e o leitor decide: Capitu traiu ou não?'},
+      {id:8,title:'Verity',author:'Colleen Hoover',cover:'https://covers.openlibrary.org/b/isbn/9781538724736-L.jpg',rating:4.3,readers:'31.0K',chapters:16,genre:'Suspense',description:'Uma escritora descobre manuscritos perturbadores da esposa de seu novo interesse.'},
+      {id:9,title:'1984',author:'George Orwell',cover:'https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg',rating:4.7,readers:'55.4K',chapters:23,genre:'Distopia',description:'O Grande Irmão está te observando. A distopia definitiva.'},
+      {id:10,title:'A Revolução dos Bichos',author:'George Orwell',cover:'https://covers.openlibrary.org/b/isbn/9780451526342-L.jpg',rating:4.5,readers:'38.9K',chapters:10,genre:'Ficção',description:'Uma fábula política brilhante sobre poder e corrupção.'},
+      {id:11,title:'Orgulho e Preconceito',author:'Jane Austen',cover:'https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg',rating:4.6,readers:'45.1K',chapters:24,genre:'Romance',description:'Elizabeth Bennet e Mr. Darcy numa das maiores histórias de amor da literatura.'},
+      {id:12,title:'Cem Anos de Solidão',author:'Gabriel García Márquez',cover:'https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg',rating:4.8,readers:'33.6K',chapters:20,genre:'Ficção',description:'A saga épica da família Buendía em Macondo, onde o mágico é real.'},
+      {id:13,title:'O Morro dos Ventos Uivantes',author:'Emily Brontë',cover:'https://covers.openlibrary.org/b/isbn/9780141439556-L.jpg',rating:4.3,readers:'18.4K',chapters:17,genre:'Clássico',description:'Uma história de amor e vingança nos campos selvagens da Inglaterra.'},
+      {id:14,title:'A Culpa é das Estrelas',author:'John Green',cover:'https://covers.openlibrary.org/b/isbn/9780525478812-L.jpg',rating:4.2,readers:'52.8K',chapters:13,genre:'Romance',description:'Dois adolescentes com câncer encontram o amor e o sentido da vida.'},
+      {id:15,title:'O Alquimista',author:'Paulo Coelho',cover:'https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg',rating:4.0,readers:'67.3K',chapters:11,genre:'Fantasia',description:'Uma jornada em busca de um tesouro que revela o verdadeiro sentido dos sonhos.'},
+      {id:16,title:'Crime e Castigo',author:'Fiódor Dostoiévski',cover:'https://covers.openlibrary.org/b/isbn/9780486415871-L.jpg',rating:4.7,readers:'21.2K',chapters:30,genre:'Clássico',description:'Um estudante comete um crime e enfrenta o peso esmagador da culpa.'},
+      {id:17,title:'Fahrenheit 451',author:'Ray Bradbury',cover:'https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg',rating:4.5,readers:'29.7K',chapters:12,genre:'Distopia',description:'Num mundo onde livros são proibidos, um bombeiro começa a questionar tudo.'},
+      {id:18,title:'O Hobbit',author:'J.R.R. Tolkien',cover:'https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg',rating:4.8,readers:'61.5K',chapters:19,genre:'Fantasia',description:'Bilbo Baggins parte numa aventura inesperada com dragões e tesouros.'},
     ];
     const forumPosts = [
-      { id:10, user: users[0], chapter:5, text:'A cena do jardim nesse capítulo é uma das mais bonitas que já li. A metáfora das flores como cicatrizes me quebrou.', spoiler:false, likes:45, replies:12, time:'1h' },
-      { id:11, user: users[2], chapter:5, text:'Alguém mais notou a mudança no tom da narrativa aqui? Parece que a Lily finalmente está começando a questionar tudo.', spoiler:false, likes:32, replies:8, time:'3h' },
-      { id:12, user: users[3], chapter:5, text:'Teoria: o diário dela vai revelar algo muito maior do que parece. A pista está na página 47.', spoiler:true, likes:78, replies:23, time:'5h' },
-      { id:13, user: users[1], chapter:3, text:'O ritmo desse capítulo é perfeito. Cada parágrafo te puxa mais pra dentro da história.', spoiler:false, likes:56, replies:14, time:'2h' },
-      { id:14, user: users[0], chapter:'geral', text:'Esse livro inteiro é uma montanha-russa emocional. Colleen Hoover realmente sabe como fazer a gente sentir tudo.', spoiler:false, likes:112, replies:38, time:'30min' },
-      { id:15, user: users[3], chapter:'geral', text:'Comecei ontem e não consigo parar de ler. Alguém mais passou por isso?', spoiler:false, likes:95, replies:27, time:'1h' },
-      { id:16, user: users[2], chapter:'geral', text:'A capa do livro é linda, mas não faz jus ao peso emocional da história. Recomendo muito.', spoiler:false, likes:64, replies:11, time:'4h' },
+      {id:10,user:users[0],chapter:5,text:'A cena do jardim nesse capítulo é uma das mais bonitas que já li. A metáfora das flores como cicatrizes me quebrou.',spoiler:false,likes:45,replies:12,time:'1h'},
+      {id:11,user:users[2],chapter:5,text:'Alguém mais notou a mudança no tom da narrativa aqui? Parece que a Lily finalmente está começando a questionar tudo.',spoiler:false,likes:32,replies:8,time:'3h'},
+      {id:12,user:users[3],chapter:5,text:'Teoria: o diário dela vai revelar algo muito maior do que parece. A pista está na página 47.',spoiler:true,likes:78,replies:23,time:'5h'},
+      {id:13,user:users[1],chapter:3,text:'O ritmo desse capítulo é perfeito. Cada parágrafo te puxa mais pra dentro da história.',spoiler:false,likes:56,replies:14,time:'2h'},
+      {id:14,user:users[0],chapter:'geral',text:'Esse livro inteiro é uma montanha-russa emocional. Colleen Hoover realmente sabe como fazer a gente sentir tudo.',spoiler:false,likes:112,replies:38,time:'30min'},
+      {id:15,user:users[3],chapter:'geral',text:'Comecei ontem e não consigo parar de ler. Alguém mais passou por isso?',spoiler:false,likes:95,replies:27,time:'1h'},
+      {id:16,user:users[2],chapter:'geral',text:'A capa do livro é linda, mas não faz jus ao peso emocional da história. Recomendo muito.',spoiler:false,likes:64,replies:11,time:'4h'},
     ];
     const badges = [
-      { icon: 'lightbulb', label: 'Teorista do Cap. 5', color: 'bg-amber-100 text-amber-700' },
-      { icon: 'zap', label: 'Maratonista', color: 'bg-purple-100 text-purple-700' },
-      { icon: 'flag', label: 'Primeiro a Chegar', color: 'bg-accent-100 text-accent-700' },
-      { icon: 'flame', label: 'Debate Aceso', color: 'bg-red-100 text-red-600' },
+      {icon:'lightbulb',label:'Teorista do Cap. 5',color:'bg-amber-100 text-amber-700'},
+      {icon:'zap',label:'Maratonista',color:'bg-purple-100 text-purple-700'},
+      {icon:'flag',label:'Primeiro a Chegar',color:'bg-accent-100 text-accent-700'},
+      {icon:'flame',label:'Debate Aceso',color:'bg-red-100 text-red-600'},
     ];
-    const currentUser = { name: 'Rayssa', handle: '@rayssa', avatar: null, bio: 'Apaixonada por livros.', followers: 500, following: 120, booksRead: 25, joined: 'Abr 2025' };
+    const currentUser = {name:'Rayssa',handle:'@rayssa',avatar:null,bio:'Apaixonada por livros.',followers:500,following:120,booksRead:25,joined:'Abr 2025'};
     const MAX = 40000;
-    const genres = ['Todos', 'Romance', 'Ficção', 'Suspense', 'Distopia', 'Fantasia', 'Clássico'];
+    const genres = ['Todos','Romance','Ficção','Suspense','Distopia','Fantasia','Clássico'];
+
+    const sampleNotifications = [
+      {id:1,type:'like',user:users[0],text:'curtiu seu verso sobre É Assim que Acaba',time:'5min',read:false},
+      {id:2,type:'reply',user:users[2],text:'respondeu ao seu comentário no Cap. 5',time:'15min',read:false},
+      {id:3,type:'follow',user:users[4],text:'começou a te seguir',time:'1h',read:false},
+      {id:4,type:'badge',user:null,text:'Você ganhou a badge "Maratonista"! 🎉',time:'2h',read:true},
+      {id:5,type:'like',user:users[3],text:'curtiu seu verso sobre O Hobbit',time:'3h',read:true},
+      {id:6,type:'reply',user:users[1],text:'mencionou você em uma discussão',time:'5h',read:true},
+      {id:7,type:'follow',user:users[5],text:'começou a te seguir',time:'1d',read:true},
+      {id:8,type:'like',user:users[0],text:'curtiu seu verso sobre Cem Anos de Solidão',time:'2d',read:true},
+    ];
 
     /* ══════════════════════════════════ */
     /*   COMPONENTS (defined outside App)*/
     /* ══════════════════════════════════ */
 
     /* ═══════ POST CARD ═══════ */
-    const PostCard = ({ p, showBookCtx = true }) => {
-      const { go, goUser, updatePost } = useApp();
-      const [liked, setLiked] = useState(false);
-      const [following, setFollowing] = useState(true);
-      const [showSpoiler, setShowSpoiler] = useState(false);
-      const [editing, setEditing] = useState(false);
-      const editRef = useRef(null);
-      const isOwner = p.user.handle === currentUser.handle;
-      const handleSave = () => {
-        const val = editRef.current ? editRef.current.value.trim() : '';
-        if (val && val !== p.text) updatePost(p.id, val);
-        setEditing(false);
-      };
+    const PostCard = ({p,showBookCtx=true,delay=0}) => {
+      const {go,goUser,updatePost}=useApp();
+      const [liked,setLiked]=useState(false);
+      const [following,setFollowing]=useState(true);
+      const [showSpoiler,setShowSpoiler]=useState(false);
+      const [editing,setEditing]=useState(false);
+      const [likeAnim,setLikeAnim]=useState(false);
+      const editRef=useRef(null);
+      const isOwner=p.user.handle===currentUser.handle;
+      const handleSave=()=>{const val=editRef.current?editRef.current.value.trim():'';if(val&&val!==p.text)updatePost(p.id,val);setEditing(false)};
+      const handleLike=()=>{setLiked(!liked);if(!liked){setLikeAnim(true);setTimeout(()=>setLikeAnim(false),400)}};
       return (
-        <div className="bg-white rounded-2xl p-4 mb-3 border border-stone-100 shadow-sm">
+        <div className={`bg-white rounded-2xl p-4 mb-3 border border-stone-100 shadow-sm hover-lift anim-slide-up`} style={{animationDelay:`${delay}s`}}>
           <div className="flex gap-3">
-            <Av name={p.user.name} size={36} />
+            <Av name={p.user.name} size={36}/>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <button onClick={() => goUser(p.user)} className="font-semibold text-sm text-ink hover:text-accent-600 transition">{p.user.name}</button>
-                <span className="text-ink-muted text-xs">{p.user.handle}</span>
-                <button onClick={() => setFollowing(!following)}
-                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition ${following ? 'bg-stone-100 text-ink-muted hover:bg-red-50 hover:text-red-500' : 'bg-accent-600 text-white hover:bg-accent-700'}`}>
-                  {following ? 'Seguindo' : 'Seguir'}
+              <div className="flex items-center gap-2 flex-wrap">
+                <button onClick={()=>goUser(p.user)} className="font-semibold text-sm text-ink hover:text-accent-600 transition press">{p.user.name}</button>
+                <span className="text-ink-muted text-xs hidden xs:inline">{p.user.handle}</span>
+                <button onClick={()=>setFollowing(!following)}
+                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition press ${following?'bg-stone-100 text-ink-muted hover:bg-red-50 hover:text-red-500':'bg-accent-600 text-white hover:bg-accent-700'}`}>
+                  {following?'Seguindo':'Seguir'}
                 </button>
                 <span className="text-ink-faint text-xs ml-auto">{p.time}</span>
               </div>
-              {showBookCtx && p.book && p.book.cover && (
-                <button onClick={() => go('forum', p.book)} className="mt-1 flex items-center gap-1.5 text-[11px] text-accent-600 font-medium hover:text-accent-700 transition">
-                  <I name="book-open" size={12} />
-                  {p.book.title} &middot; {typeof p.chapter === 'number' ? `Cap. ${p.chapter}` : 'Geral'}
+              {showBookCtx&&p.book&&p.book.cover&&(
+                <button onClick={()=>go('forum',p.book)} className="mt-1 flex items-center gap-1.5 text-[11px] text-accent-600 font-medium hover:text-accent-700 transition">
+                  <I name="book-open" size={12}/>{p.book.title} &middot; {typeof p.chapter==='number'?`Cap. ${p.chapter}`:'Geral'}
                 </button>
               )}
-              {!showBookCtx && <p className="text-[11px] text-accent-600 font-medium mt-0.5">{typeof p.chapter === 'number' ? `Capítulo ${p.chapter}` : 'Geral'}</p>}
-              {editing ? (
-                <div className="mt-2">
-                  <textarea ref={editRef} defaultValue={p.text}
-                    className="w-full bg-white border border-accent-300 rounded-lg px-3 py-2 text-[13px] text-ink outline-none resize-none leading-relaxed focus:border-accent-500" rows="4" autoFocus />
+              {!showBookCtx&&<p className="text-[11px] text-accent-600 font-medium mt-0.5">{typeof p.chapter==='number'?`Capítulo ${p.chapter}`:'Geral'}</p>}
+              {editing?(
+                <div className="mt-2 anim-scale">
+                  <textarea ref={editRef} defaultValue={p.text} className="w-full bg-white border border-accent-300 rounded-lg px-3 py-2 text-[13px] text-ink outline-none resize-none leading-relaxed focus:border-accent-500 focus:ring-2 focus:ring-accent-100" rows="4" autoFocus/>
                   <div className="flex items-center gap-2 mt-2">
-                    <button onClick={handleSave} className="text-[11px] font-semibold px-3 py-1 bg-accent-600 text-white rounded-full hover:bg-accent-700 transition">Salvar</button>
-                    <button onClick={() => setEditing(false)} className="text-[11px] font-semibold px-3 py-1 bg-stone-100 text-ink-muted rounded-full hover:bg-stone-200 transition">Cancelar</button>
+                    <button onClick={handleSave} className="text-[11px] font-semibold px-3 py-1 bg-accent-600 text-white rounded-full hover:bg-accent-700 transition press">Salvar</button>
+                    <button onClick={()=>setEditing(false)} className="text-[11px] font-semibold px-3 py-1 bg-stone-100 text-ink-muted rounded-full hover:bg-stone-200 transition press">Cancelar</button>
                   </div>
                 </div>
-              ) : p.spoiler && !showSpoiler ? (
-                <div className="mt-2 bg-stone-50 border border-stone-200 rounded-lg p-3 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs text-ink-light"><I name="eye-off" size={14} className="text-spoiler" /><span>Contém spoiler</span></div>
-                  <button onClick={() => setShowSpoiler(true)} className="text-xs text-accent-600 font-semibold hover:text-accent-700">Revelar</button>
+              ):p.spoiler&&!showSpoiler?(
+                <div className="mt-2 bg-stone-50 border border-stone-200 rounded-lg p-3 flex items-center justify-between anim-fade">
+                  <div className="flex items-center gap-2 text-xs text-ink-light"><I name="eye-off" size={14} className="text-spoiler"/><span>Contém spoiler</span></div>
+                  <button onClick={()=>setShowSpoiler(true)} className="text-xs text-accent-600 font-semibold hover:text-accent-700 press">Revelar</button>
                 </div>
-              ) : (
-                <p className="mt-2 text-[13px] text-ink leading-relaxed">
-                  {p.spoiler && <span className="inline-flex items-center gap-1 text-[10px] text-spoiler font-semibold uppercase tracking-wide mr-1.5"><I name="alert-triangle" size={10} className="text-spoiler" />Spoiler</span>}
+              ):(
+                <p className="mt-2 text-[13px] text-ink leading-relaxed anim-fade">
+                  {p.spoiler&&<span className="inline-flex items-center gap-1 text-[10px] text-spoiler font-semibold uppercase tracking-wide mr-1.5"><I name="alert-triangle" size={10} className="text-spoiler"/>Spoiler</span>}
                   {p.text}
                 </p>
               )}
               <div className="flex items-center gap-5 mt-3">
-                <button onClick={() => setLiked(!liked)} className={`flex items-center gap-1 text-xs transition ${liked ? 'text-rose-500' : 'text-ink-muted hover:text-rose-400'}`}>
-                  <I name="heart" size={14} fill={liked} /> {p.likes + (liked ? 1 : 0)}
+                <button onClick={handleLike} className={`flex items-center gap-1 text-xs transition press ${liked?'text-rose-500':'text-ink-muted hover:text-rose-400'}`}>
+                  <span className={likeAnim?'anim-pop':''}><I name="heart" size={14} fill={liked}/></span> {p.likes+(liked?1:0)}
                 </button>
-                <button className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition"><I name="message-circle" size={14} /> {p.replies}</button>
-                {isOwner && !editing && (
-                  <button onClick={() => setEditing(true)} className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition"><I name="pencil" size={14} /></button>
-                )}
-                <button className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition ml-auto"><I name="bookmark" size={14} /></button>
+                <button className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition press"><I name="message-circle" size={14}/> {p.replies}</button>
+                {isOwner&&!editing&&(<button onClick={()=>setEditing(true)} className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition press"><I name="pencil" size={14}/></button>)}
+                <button className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition ml-auto press"><I name="bookmark" size={14}/></button>
               </div>
             </div>
           </div>
@@ -207,93 +254,95 @@
 
     /* ═══════ SCREEN: HOME ═══════ */
     const Home = () => {
-      const { tab, setTab, feedPosts, go } = useApp();
-      const [heroIdx, setHeroIdx] = useState(0);
-      const heroBooks = [books[0], books[3], books[11], books[17]];
-      useEffect(() => { const t = setInterval(() => setHeroIdx(i => (i+1) % heroBooks.length), 5000); return () => clearInterval(t); }, []);
-      const hb = heroBooks[heroIdx];
+      const {tab,setTab,feedPosts,go}=useApp();
+      const [heroIdx,setHeroIdx]=useState(0);
+      const heroBooks=[books[0],books[3],books[11],books[17]];
+      useEffect(()=>{const t=setInterval(()=>setHeroIdx(i=>(i+1)%heroBooks.length),5000);return ()=>clearInterval(t)},[]);
+      const hb=heroBooks[heroIdx];
       return (
-        <div className="pb-20 relative">
-          {/* Hero Carousel */}
+        <div className="pb-20 md:pb-4 relative anim-fade">
+          {/* Hero */}
           <div className="hero-gradient blob-pattern relative overflow-hidden px-5 pt-6 pb-8">
-            <div className="flex items-center gap-4">
+            <div key={heroIdx} className="flex items-center gap-4 anim-fade">
               <div className="flex-1 min-w-0">
                 <p className="text-accent-300 text-[10px] font-semibold uppercase tracking-widest mb-1">{hb.genre}</p>
-                <h2 className="font-display text-white text-xl font-bold leading-tight">{hb.title}</h2>
+                <h2 className="font-display text-white text-xl md:text-2xl font-bold leading-tight">{hb.title}</h2>
                 <p className="text-stone-300 text-xs mt-1">{hb.author}</p>
                 <p className="text-stone-400 text-[11px] mt-2 line-clamp-2">{hb.description}</p>
-                <button onClick={() => go('forum', hb)} className="mt-3 px-4 py-2 bg-white text-navy-500 text-xs font-semibold rounded-lg hover:bg-stone-100 transition">
-                  Ver mais
-                </button>
+                <div className="flex gap-2 mt-3">
+                  <button onClick={()=>go('bookdetail',hb)} className="px-4 py-2 bg-white text-navy-500 text-xs font-semibold rounded-lg hover:bg-stone-100 transition press">Ver mais</button>
+                  <button onClick={()=>go('forum',hb)} className="px-4 py-2 bg-white/10 text-white text-xs font-semibold rounded-lg hover:bg-white/20 transition press border border-white/20">Fórum</button>
+                </div>
               </div>
-              <img src={hb.cover} className="w-24 h-36 rounded-xl object-cover shadow-xl flex-shrink-0 border-2 border-white/20" />
+              <Img src={hb.cover} className="w-24 h-36 md:w-28 md:h-40 rounded-xl shadow-xl flex-shrink-0 border-2 border-white/20"/>
             </div>
             <div className="flex justify-center gap-1.5 mt-4">
-              {heroBooks.map((_, i) => <div key={i} className={`w-2 h-2 rounded-full transition ${i === heroIdx ? 'bg-white' : 'bg-white/30'}`} />)}
+              {heroBooks.map((_,i)=><button key={i} onClick={()=>setHeroIdx(i)} className={`w-2 h-2 rounded-full transition ${i===heroIdx?'bg-white scale-125':'bg-white/30 hover:bg-white/50'}`}/>)}
             </div>
           </div>
-
-          {/* Feed Tabs */}
+          {/* Trending books strip */}
+          <div className="bg-white px-4 py-3 border-b border-stone-200">
+            <p className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider mb-2">Em Alta</p>
+            <div className="flex gap-3 overflow-x-auto no-scrollbar">
+              {books.slice(0,8).map((b,i)=>(
+                <button key={b.id} onClick={()=>go('bookdetail',b)} className={`flex-shrink-0 anim-slide-up anim-d${Math.min(i+1,5)}`}>
+                  <Img src={b.cover} className="w-14 h-20 md:w-16 md:h-22 rounded-lg shadow-sm hover-lift"/>
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* Tabs */}
           <div className="flex border-b border-stone-200 bg-white">
-            {['seguindo','explorar'].map(t => (
-              <button key={t} onClick={() => setTab(t)}
-                className={`flex-1 py-3 text-sm font-semibold capitalize transition ${tab === t ? 'text-accent-600 border-b-2 border-accent-600' : 'text-ink-muted'}`}>{t}</button>
+            {['seguindo','explorar'].map(t=>(
+              <button key={t} onClick={()=>setTab(t)}
+                className={`flex-1 py-3 text-sm font-semibold capitalize transition press ${tab===t?'text-accent-600 border-b-2 border-accent-600':'text-ink-muted'}`}>{t}</button>
             ))}
           </div>
-          <div className="p-4">{feedPosts.map(p => <PostCard key={p.id} p={p} />)}</div>
+          <div className="p-4">{feedPosts.map((p,i)=><PostCard key={p.id} p={p} delay={i*.06}/>)}</div>
         </div>
       );
     };
 
     /* ═══════ SCREEN: BUSCA ═══════ */
     const Busca = () => {
-      const { go } = useApp();
-      const [q, setQ] = useState('');
-      const [genre, setGenre] = useState('Todos');
-      const inputRef = useRef(null);
-      useEffect(() => { if (inputRef.current) inputRef.current.focus(); }, []);
-      const filtered = books.filter(b => {
-        const matchQ = q.length === 0 || b.title.toLowerCase().includes(q.toLowerCase()) || b.author.toLowerCase().includes(q.toLowerCase());
-        const matchG = genre === 'Todos' || b.genre === genre;
-        return matchQ && matchG;
+      const {go}=useApp();
+      const [q,setQ]=useState('');
+      const [genre,setGenre]=useState('Todos');
+      const inputRef=useRef(null);
+      useEffect(()=>{if(inputRef.current)inputRef.current.focus()},[]);
+      const filtered=books.filter(b=>{
+        const mQ=q.length===0||b.title.toLowerCase().includes(q.toLowerCase())||b.author.toLowerCase().includes(q.toLowerCase());
+        const mG=genre==='Todos'||b.genre===genre;
+        return mQ&&mG;
       });
       return (
-        <div className="pb-20">
+        <div className="pb-20 md:pb-4 anim-fade">
           <div className="p-4">
-            {/* Search bar */}
-            <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 border border-stone-200 mb-4 shadow-sm">
-              <I name="search" size={16} className="text-ink-muted" />
-              <input ref={inputRef} defaultValue="" onInput={e => setQ(e.target.value)}
-                placeholder="Título, autor ou gênero..." className="flex-1 bg-transparent outline-none text-sm text-ink placeholder-ink-faint" />
-              {q && <button onClick={() => { if(inputRef.current) inputRef.current.value = ''; setQ(''); }} className="text-ink-faint hover:text-ink-muted text-lg leading-none">&times;</button>}
+            <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 border border-stone-200 mb-4 shadow-sm focus-within:border-accent-400 focus-within:ring-2 focus-within:ring-accent-100 transition anim-slide-up">
+              <I name="search" size={16} className="text-ink-muted"/>
+              <input ref={inputRef} defaultValue="" onInput={e=>setQ(e.target.value)}
+                placeholder="Título, autor ou gênero..." className="flex-1 bg-transparent outline-none text-sm text-ink placeholder-ink-faint"/>
+              {q&&<button onClick={()=>{if(inputRef.current)inputRef.current.value='';setQ('')}} className="text-ink-faint hover:text-ink-muted text-lg leading-none press">&times;</button>}
             </div>
-
-            {/* Genre filter tabs (from template) */}
-            <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4">
-              {genres.map(g => (
-                <button key={g} onClick={() => setGenre(g)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${genre === g ? 'bg-navy-500 text-white' : 'bg-white text-ink-light border border-stone-200 hover:border-accent-300'}`}>
-                  {g}
-                </button>
+            <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 anim-slide-up anim-d1">
+              {genres.map(g=>(
+                <button key={g} onClick={()=>setGenre(g)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition press ${genre===g?'bg-navy-500 text-white':'bg-white text-ink-light border border-stone-200 hover:border-accent-300'}`}>{g}</button>
               ))}
             </div>
-
-            <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">{q || genre !== 'Todos' ? `${filtered.length} resultado${filtered.length !== 1 ? 's' : ''}` : 'Catálogo'}</p>
-
-            {filtered.length === 0 && (
-              <div className="text-center py-12">
-                <I name="search" size={32} className="mx-auto mb-3 text-ink-faint" />
+            <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">{q||genre!=='Todos'?`${filtered.length} resultado${filtered.length!==1?'s':''}`:'Catálogo'}</p>
+            {filtered.length===0&&(
+              <div className="text-center py-12 anim-scale">
+                <I name="search" size={32} className="mx-auto mb-3 text-ink-faint"/>
                 <p className="text-sm text-ink-muted">Nenhum livro encontrado</p>
                 <p className="text-xs text-ink-faint mt-1">Tente outro título, autor ou gênero</p>
               </div>
             )}
-
-            {/* Book grid (inspired by template) */}
-            <div className="grid grid-cols-2 gap-3">
-              {filtered.map(b => (
-                <div key={b.id} onClick={() => go('forum', b)} className="bg-white rounded-xl overflow-hidden border border-stone-100 shadow-sm cursor-pointer hover:shadow-md transition group">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {filtered.map((b,i)=>(
+                <div key={b.id} onClick={()=>go('bookdetail',b)} className={`bg-white rounded-xl overflow-hidden border border-stone-100 shadow-sm cursor-pointer hover-lift group anim-slide-up`} style={{animationDelay:`${i*.04}s`}}>
                   <div className="relative">
-                    <img src={b.cover} alt={b.title} className="w-full aspect-[2/3] object-cover" />
+                    <Img src={b.cover} alt={b.title} className="w-full aspect-[2/3]"/>
                     <div className="absolute top-2 right-2 bg-black/60 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
                       <span className="text-amber-400">★</span> {b.rating}
                     </div>
@@ -302,7 +351,7 @@
                     <p className="font-semibold text-xs text-ink line-clamp-2 group-hover:text-accent-600 transition">{b.title}</p>
                     <p className="text-[10px] text-ink-light mt-0.5">{b.author}</p>
                     <div className="flex items-center gap-1 mt-1.5">
-                      <I name="users" size={10} className="text-ink-faint" />
+                      <I name="users" size={10} className="text-ink-faint"/>
                       <span className="text-[9px] text-ink-muted">{b.readers}</span>
                       <span className="text-[9px] text-ink-faint ml-auto">{b.genre}</span>
                     </div>
@@ -315,29 +364,91 @@
       );
     };
 
+    /* ═══════ SCREEN: BOOK DETAIL ═══════ */
+    const BookDetail = () => {
+      const {postBook,go,goBack,setPostBook}=useApp();
+      const b=postBook||books[0];
+      const related=books.filter(x=>x.genre===b.genre&&x.id!==b.id).slice(0,4);
+      return (
+        <div className="min-h-screen pb-20 md:pb-4 anim-fade">
+          <div className="hero-gradient blob-pattern px-4 pt-4 pb-8">
+            <button onClick={goBack} className="text-white/70 mb-4 press"><I name="arrow-left" size={20}/></button>
+            <div className="flex flex-col items-center text-center">
+              <Img src={b.cover} className="w-36 h-52 md:w-44 md:h-64 rounded-2xl shadow-2xl border-2 border-white/20 anim-scale"/>
+              <h2 className="font-display text-white text-xl md:text-2xl font-bold mt-5 anim-slide-up anim-d1">{b.title}</h2>
+              <p className="text-stone-300 text-sm mt-1 anim-slide-up anim-d2">{b.author}</p>
+              <div className="flex items-center gap-4 mt-3 anim-slide-up anim-d3">
+                <span className="flex items-center gap-1 text-amber-400 text-sm font-semibold">★ {b.rating}</span>
+                <span className="text-stone-400 text-xs">{b.readers} leitores</span>
+                <span className="text-stone-400 text-xs">{b.chapters} capítulos</span>
+              </div>
+              <span className="mt-2 px-3 py-1 bg-white/10 rounded-full text-[11px] text-stone-300 font-medium border border-white/10 anim-slide-up anim-d4">{b.genre}</span>
+            </div>
+          </div>
+          <div className="p-4 -mt-4">
+            <div className="bg-white rounded-2xl p-5 shadow-sm border border-stone-100 anim-slide-up anim-d3">
+              <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-2">Sinopse</p>
+              <p className="text-sm text-ink leading-relaxed">{b.description}</p>
+            </div>
+            <div className="grid grid-cols-3 gap-3 mt-4">
+              {[
+                {icon:'book-open',label:'Capítulos',value:b.chapters},
+                {icon:'users',label:'Leitores',value:b.readers},
+                {icon:'star',label:'Avaliação',value:b.rating},
+              ].map((s,i)=>(
+                <div key={s.label} className={`bg-white rounded-xl p-3 text-center border border-stone-100 shadow-sm anim-slide-up anim-d${i+2}`}>
+                  <I name={s.icon} size={18} className="mx-auto text-accent-500 mb-1"/>
+                  <p className="text-lg font-bold text-ink">{s.value}</p>
+                  <p className="text-[10px] text-ink-muted">{s.label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-3 mt-5 anim-slide-up anim-d4">
+              <button onClick={()=>go('forum',b)} className="flex-1 py-3 bg-accent-600 text-white text-sm font-semibold rounded-xl hover:bg-accent-700 transition press flex items-center justify-center gap-2">
+                <I name="message-circle" size={16}/> Ir ao Fórum
+              </button>
+              <button onClick={()=>{setPostBook(b);go('post')}} className="flex-1 py-3 bg-navy-500 text-white text-sm font-semibold rounded-xl hover:bg-navy-600 transition press flex items-center justify-center gap-2">
+                <I name="pen-tool" size={16}/> Escrever Verso
+              </button>
+            </div>
+            {related.length>0&&(
+              <div className="mt-6 anim-slide-up anim-d5">
+                <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Você Também Pode Gostar</p>
+                <div className="flex gap-3 overflow-x-auto no-scrollbar">
+                  {related.map(r=>(
+                    <button key={r.id} onClick={()=>go('bookdetail',r)} className="flex-shrink-0 w-28 hover-lift press">
+                      <Img src={r.cover} className="w-28 h-40 rounded-xl shadow-sm"/>
+                      <p className="text-[11px] font-semibold text-ink mt-2 truncate">{r.title}</p>
+                      <p className="text-[10px] text-ink-light truncate">{r.author}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
     /* ═══════ SCREEN: FÓRUM ═══════ */
     const Forum = () => {
-      const { postBook, userChapter, chapter, setChapter, go, goBack, setPostBook } = useApp();
-      const b = postBook || books[0];
-      const locked = (ch) => ch > userChapter;
-      const chapNums = [];
-      for (let i=1; i<=b.chapters; i++) {
-        if (i<=3 || i>=b.chapters-1 || (typeof chapter === 'number' && (i===chapter || Math.abs(i-chapter)<=1))) chapNums.push(i);
-        else if (chapNums[chapNums.length-1]!=='...') chapNums.push('...');
-      }
-      const chPosts = chapter === 'todos' ? forumPosts : chapter === 'geral' ? forumPosts.filter(p => p.chapter === 'geral') : forumPosts.filter(p => p.chapter === chapter);
-      const teaserLabel = chapter === 'todos' ? 'este livro' : chapter === 'geral' ? 'discussões gerais' : `Capítulo ${chapter}`;
-      const tabBtn = (id, label) => (
-        <button key={id} onClick={() => setChapter(id)}
-          className={`px-3 h-9 rounded-lg text-xs font-semibold flex items-center justify-center transition flex-shrink-0 ${chapter === id ? 'bg-accent-600 text-white shadow-sm' : 'bg-white text-ink-light border border-stone-200 hover:border-accent-300'}`}>{label}</button>
+      const {postBook,userChapter,chapter,setChapter,go,goBack,setPostBook}=useApp();
+      const b=postBook||books[0];
+      const locked=(ch)=>ch>userChapter;
+      const chapNums=[];
+      for(let i=1;i<=b.chapters;i++){if(i<=3||i>=b.chapters-1||(typeof chapter==='number'&&(i===chapter||Math.abs(i-chapter)<=1)))chapNums.push(i);else if(chapNums[chapNums.length-1]!=='...')chapNums.push('...')}
+      const chPosts=chapter==='todos'?forumPosts:chapter==='geral'?forumPosts.filter(p=>p.chapter==='geral'):forumPosts.filter(p=>p.chapter===chapter);
+      const teaserLabel=chapter==='todos'?'este livro':chapter==='geral'?'discussões gerais':`Capítulo ${chapter}`;
+      const tabBtn=(id,label)=>(
+        <button key={id} onClick={()=>setChapter(id)}
+          className={`px-3 h-9 rounded-lg text-xs font-semibold flex items-center justify-center transition flex-shrink-0 press ${chapter===id?'bg-accent-600 text-white shadow-sm':'bg-white text-ink-light border border-stone-200 hover:border-accent-300'}`}>{label}</button>
       );
       return (
-        <div className="min-h-screen flex flex-col pb-20">
-          {/* Book header (inspired by template book detail) */}
+        <div className="min-h-screen flex flex-col pb-20 md:pb-4 anim-fade">
           <div className="hero-gradient blob-pattern px-4 pt-4 pb-5">
-            <button onClick={goBack} className="text-white/70 mb-3"><I name="arrow-left" size={20} /></button>
-            <div className="flex gap-4 items-start">
-              <img src={b.cover} className="w-20 h-28 rounded-xl object-cover shadow-xl flex-shrink-0 border-2 border-white/20" />
+            <button onClick={goBack} className="text-white/70 mb-3 press"><I name="arrow-left" size={20}/></button>
+            <div className="flex gap-4 items-start anim-slide-right">
+              <Img src={b.cover} className="w-20 h-28 rounded-xl shadow-xl flex-shrink-0 border-2 border-white/20"/>
               <div className="flex-1 min-w-0">
                 <p className="font-display text-white text-lg font-bold leading-tight">{b.title}</p>
                 <p className="text-stone-300 text-xs mt-1">{b.author}</p>
@@ -350,45 +461,33 @@
               </div>
             </div>
           </div>
-
-          {/* Progress bar */}
-          <div className="bg-white px-4 py-3 border-b border-stone-200">
+          <div className="bg-white px-4 py-3 border-b border-stone-200 anim-slide-up anim-d1">
             <div className="flex items-center justify-between mb-1.5"><span className="text-[11px] text-ink-light font-medium">Seu progresso</span><span className="text-[11px] text-accent-600 font-semibold">Cap. {userChapter} de {b.chapters}</span></div>
-            <div className="h-1.5 bg-stone-100 rounded-full overflow-hidden"><div className="h-full bg-accent-500 rounded-full transition-all" style={{ width: `${(userChapter / b.chapters) * 100}%` }} /></div>
+            <div className="h-1.5 bg-stone-100 rounded-full overflow-hidden"><div className="h-full bg-accent-500 rounded-full transition-all" style={{width:`${(userChapter/b.chapters)*100}%`}}/></div>
           </div>
-
-          {/* Tabs */}
-          <div className="bg-white px-4 pt-3 pb-3 border-b border-stone-200">
+          <div className="bg-white px-4 pt-3 pb-3 border-b border-stone-200 anim-slide-up anim-d2">
             <p className="text-[11px] font-semibold text-ink-light mb-2 uppercase tracking-wider">Filtrar por</p>
             <div className="flex gap-1.5 items-center overflow-x-auto no-scrollbar">
-              {tabBtn('todos', 'Todos')}{tabBtn('geral', 'Geral')}
-              <div className="w-px h-6 bg-stone-200 mx-1 flex-shrink-0" />
-              {chapNums.map((ch, idx) =>
-                ch === '...' ? <span key={`d${idx}`} className="text-ink-faint text-xs px-1">...</span> : (
-                  <button key={ch} onClick={() => !locked(ch) && setChapter(ch)}
-                    className={`w-9 h-9 rounded-lg text-xs font-semibold flex items-center justify-center transition flex-shrink-0 relative ${locked(ch) ? 'bg-stone-100 text-ink-faint cursor-not-allowed' : chapter === ch ? 'bg-accent-600 text-white shadow-sm' : 'bg-white text-ink-light border border-stone-200 hover:border-accent-300'}`}>
-                    {locked(ch) ? <I name="lock" size={12} className="text-ink-faint" /> : ch}
-                    {!locked(ch) && ch !== chapter && <span className="absolute -top-1 -right-1 w-2 h-2 bg-accent-400 rounded-full" />}
-                  </button>
-                )
-              )}
+              {tabBtn('todos','Todos')}{tabBtn('geral','Geral')}
+              <div className="w-px h-6 bg-stone-200 mx-1 flex-shrink-0"/>
+              {chapNums.map((ch,idx)=>ch==='...'?<span key={`d${idx}`} className="text-ink-faint text-xs px-1">...</span>:(
+                <button key={ch} onClick={()=>!locked(ch)&&setChapter(ch)}
+                  className={`w-9 h-9 rounded-lg text-xs font-semibold flex items-center justify-center transition flex-shrink-0 relative press ${locked(ch)?'bg-stone-100 text-ink-faint cursor-not-allowed':chapter===ch?'bg-accent-600 text-white shadow-sm':'bg-white text-ink-light border border-stone-200 hover:border-accent-300'}`}>
+                  {locked(ch)?<I name="lock" size={12} className="text-ink-faint"/>:ch}
+                  {!locked(ch)&&ch!==chapter&&<span className="absolute -top-1 -right-1 w-2 h-2 bg-accent-400 rounded-full"/>}
+                </button>
+              ))}
             </div>
           </div>
-
-          {/* Share bar */}
-          <div className="px-4 py-2.5 bg-accent-50 flex items-center gap-2 border-b border-accent-100">
-            <I name="message-circle" size={14} className="text-accent-500" />
-            <span className="text-[11px] text-ink-light flex-1">{chPosts.length * 15} pessoas reagiram em {teaserLabel}</span>
-            <button onClick={() => { setPostBook(b); go('post'); }}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-accent-600 text-white text-[11px] font-semibold rounded-full hover:bg-accent-700 transition">
-              <I name="plus" size={13} /> Compartilhar
-            </button>
+          <div className="px-4 py-2.5 bg-accent-50 flex items-center gap-2 border-b border-accent-100 anim-slide-up anim-d3">
+            <I name="message-circle" size={14} className="text-accent-500"/>
+            <span className="text-[11px] text-ink-light flex-1">{chPosts.length*15} pessoas reagiram em {teaserLabel}</span>
+            <button onClick={()=>{setPostBook(b);go('post')}} className="flex items-center gap-1.5 px-3 py-1.5 bg-accent-600 text-white text-[11px] font-semibold rounded-full hover:bg-accent-700 transition press"><I name="plus" size={13}/> Compartilhar</button>
           </div>
-
           <div className="p-4 flex-1">
-            {chPosts.length > 0 ? chPosts.map(p => <PostCard key={p.id} p={{...p, book: b}} showBookCtx={false} />) : (
-              <div className="text-center py-12 text-ink-muted">
-                <I name="message-circle" size={32} className="mx-auto mb-3 text-ink-faint" />
+            {chPosts.length>0?chPosts.map((p,i)=><PostCard key={p.id} p={{...p,book:b}} showBookCtx={false} delay={i*.06}/>):(
+              <div className="text-center py-12 text-ink-muted anim-scale">
+                <I name="message-circle" size={32} className="mx-auto mb-3 text-ink-faint"/>
                 <p className="text-sm font-medium">Nenhum post aqui ainda</p>
                 <p className="text-xs mt-1">Seja o primeiro a compartilhar!</p>
               </div>
@@ -400,60 +499,54 @@
 
     /* ═══════ SCREEN: NOVO VERSO ═══════ */
     const NovoVerso = () => {
-      const { postBook, postChapter, setPostChapter, spoiler, setSpoiler, publishPost, goBack } = useApp();
-      const [len, setLen] = useState(0);
-      const taRef = useRef(null);
-      useEffect(() => { if (taRef.current) taRef.current.focus(); }, []);
-      const b = postBook;
+      const {postBook,postChapter,setPostChapter,spoiler,setSpoiler,publishPost,goBack}=useApp();
+      const [len,setLen]=useState(0);
+      const taRef=useRef(null);
+      useEffect(()=>{if(taRef.current)taRef.current.focus()},[]);
+      const b=postBook;
       return (
-        <div className="min-h-screen flex flex-col pb-20">
+        <div className="min-h-screen flex flex-col pb-20 md:pb-4 anim-fade">
           <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-stone-200 sticky top-0 z-40">
-            <button onClick={goBack} className="text-ink-light"><I name="arrow-left" size={20} /></button>
+            <button onClick={goBack} className="text-ink-light press"><I name="arrow-left" size={20}/></button>
             <p className="font-semibold text-sm text-ink">Novo Verso</p>
-            <button onClick={() => publishPost(taRef)}
-              className={`text-sm font-semibold px-4 py-1.5 rounded-full transition ${len > 0 ? 'bg-accent-600 text-white' : 'bg-stone-100 text-ink-faint cursor-not-allowed'}`}
+            <button onClick={()=>publishPost(taRef)}
+              className={`text-sm font-semibold px-4 py-1.5 rounded-full transition press ${len>0?'bg-accent-600 text-white hover:bg-accent-700':'bg-stone-100 text-ink-faint cursor-not-allowed'}`}
               disabled={!len}>Publicar</button>
           </div>
           <div className="p-4 space-y-5 flex-1">
-            {b && (
-              <div className="flex items-center gap-3 bg-accent-50 rounded-xl p-3 border border-accent-100">
-                <img src={b.cover} className="w-10 h-14 rounded object-cover shadow-sm" />
-                <div className="flex-1">
-                  <p className="text-[10px] text-ink-muted uppercase tracking-wider font-medium">Livro</p>
-                  <p className="font-semibold text-sm text-ink">{b.title}</p>
-                  <p className="text-[11px] text-ink-light">{b.author}</p>
-                </div>
-                <I name="chevron-right" size={16} className="text-ink-faint" />
+            {b&&(
+              <div className="flex items-center gap-3 bg-accent-50 rounded-xl p-3 border border-accent-100 anim-slide-up">
+                <Img src={b.cover} className="w-10 h-14 rounded shadow-sm"/>
+                <div className="flex-1"><p className="text-[10px] text-ink-muted uppercase tracking-wider font-medium">Livro</p><p className="font-semibold text-sm text-ink">{b.title}</p><p className="text-[11px] text-ink-light">{b.author}</p></div>
+                <I name="chevron-right" size={16} className="text-ink-faint"/>
               </div>
             )}
-            {b && (
-              <div>
+            {b&&(
+              <div className="anim-slide-up anim-d1">
                 <p className="text-xs font-semibold text-ink-light mb-2">Checkpoint</p>
                 <div className="relative">
-                  <select value={postChapter} onChange={e => setPostChapter(e.target.value)}
-                    className="w-full bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-ink outline-none appearance-none">
+                  <select value={postChapter} onChange={e=>setPostChapter(e.target.value)} className="w-full bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm text-ink outline-none appearance-none focus:border-accent-400 focus:ring-2 focus:ring-accent-100 transition">
                     <option value="geral">Geral (sem capítulo específico)</option>
-                    {Array.from({length:b.chapters}).map((_,i) => <option key={i+1} value={i+1}>Capítulo {i+1}</option>)}
+                    {Array.from({length:b.chapters}).map((_,i)=><option key={i+1} value={i+1}>Capítulo {i+1}</option>)}
                   </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ink-muted"><I name="chevron-down" size={16} /></div>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ink-muted"><I name="chevron-down" size={16}/></div>
                 </div>
               </div>
             )}
-            <div>
+            <div className="anim-slide-up anim-d2">
               <textarea ref={taRef} defaultValue=""
-                onInput={e => { if(e.target.value.length > MAX) e.target.value = e.target.value.slice(0, MAX); setLen(e.target.value.length); }}
-                placeholder={b ? 'O que você está pensando sobre este capítulo?' : 'O que está na sua mente?'}
-                className="w-full bg-white border border-stone-200 rounded-xl px-4 py-4 text-sm text-ink placeholder-ink-faint outline-none resize-none leading-relaxed" rows="6" />
-              <p className="text-[10px] text-ink-faint text-right mt-1">{(MAX - len).toLocaleString('pt-BR')} caracteres restantes</p>
+                onInput={e=>{if(e.target.value.length>MAX)e.target.value=e.target.value.slice(0,MAX);setLen(e.target.value.length)}}
+                placeholder={b?'O que você está pensando sobre este capítulo?':'O que está na sua mente?'}
+                className="w-full bg-white border border-stone-200 rounded-xl px-4 py-4 text-sm text-ink placeholder-ink-faint outline-none resize-none leading-relaxed focus:border-accent-400 focus:ring-2 focus:ring-accent-100 transition" rows="6"/>
+              <p className="text-[10px] text-ink-faint text-right mt-1">{(MAX-len).toLocaleString('pt-BR')} caracteres restantes</p>
             </div>
-            <div className="flex items-center justify-between bg-white border border-stone-200 rounded-xl px-4 py-3">
+            <div className="flex items-center justify-between bg-white border border-stone-200 rounded-xl px-4 py-3 anim-slide-up anim-d3">
               <div className="flex items-center gap-2.5">
-                <I name="eye-off" size={16} className={spoiler ? 'text-spoiler' : 'text-ink-muted'} />
+                <I name="eye-off" size={16} className={spoiler?'text-spoiler':'text-ink-muted'}/>
                 <div><p className="text-sm font-medium text-ink">Contém Spoiler</p><p className="text-[10px] text-ink-muted">Proteja quem ainda não chegou aqui</p></div>
               </div>
-              <button onClick={() => setSpoiler(!spoiler)}
-                className={`w-12 h-7 rounded-full transition relative ${spoiler ? 'bg-spoiler' : 'bg-stone-200'}`}>
-                <div className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow transition-all ${spoiler ? 'left-[22px]' : 'left-0.5'}`} />
+              <button onClick={()=>setSpoiler(!spoiler)} className={`w-12 h-7 rounded-full transition relative press ${spoiler?'bg-spoiler':'bg-stone-200'}`}>
+                <div className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow transition-all ${spoiler?'left-[22px]':'left-0.5'}`}/>
               </button>
             </div>
           </div>
@@ -463,33 +556,28 @@
 
     /* ═══════ SCREEN: ESTANTE ═══════ */
     const Estante = () => {
-      const { go, userChapter } = useApp();
+      const {go,userChapter}=useApp();
       return (
-        <div className="pb-20">
+        <div className="pb-20 md:pb-4 anim-fade">
           <div className="p-4">
             <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Lendo Agora</p>
-            {books.slice(0,2).map((b, idx) => (
-              <div key={b.id} onClick={() => go('forum', b)} className="bg-white rounded-2xl p-4 mb-3 flex gap-4 cursor-pointer hover:shadow-md transition border border-stone-100">
-                <img src={b.cover} className="w-16 h-24 rounded-lg object-cover shadow-sm" />
+            {books.slice(0,2).map((b,idx)=>(
+              <div key={b.id} onClick={()=>go('bookdetail',b)} className={`bg-white rounded-2xl p-4 mb-3 flex gap-4 cursor-pointer hover-lift border border-stone-100 anim-slide-up anim-d${idx+1}`}>
+                <Img src={b.cover} className="w-16 h-24 rounded-lg shadow-sm"/>
                 <div className="flex-1">
                   <p className="font-semibold text-sm text-ink">{b.title}</p>
                   <p className="text-xs text-ink-light">{b.author}</p>
-                  <div className="mt-2">
-                    <div className="flex justify-between text-[10px] text-ink-muted mb-1"><span>Progresso</span><span>Cap. {idx === 0 ? userChapter : 3}/{b.chapters}</span></div>
-                    <div className="h-1.5 bg-stone-100 rounded-full"><div className="h-full bg-accent-500 rounded-full" style={{width:`${((idx === 0 ? userChapter : 3)/b.chapters)*100}%`}} /></div>
-                  </div>
+                  <div className="mt-2"><div className="flex justify-between text-[10px] text-ink-muted mb-1"><span>Progresso</span><span>Cap. {idx===0?userChapter:3}/{b.chapters}</span></div>
+                  <div className="h-1.5 bg-stone-100 rounded-full"><div className="h-full bg-accent-500 rounded-full transition-all" style={{width:`${((idx===0?userChapter:3)/b.chapters)*100}%`}}/></div></div>
                 </div>
               </div>
             ))}
             <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3 mt-5">Lista de Desejos</p>
-            <div className="grid grid-cols-3 gap-3">
-              {books.slice(4, 13).map(b => (
-                <div key={b.id} className="bg-white rounded-xl overflow-hidden cursor-pointer border border-stone-100 shadow-sm hover:shadow-md transition" onClick={() => go('forum', b)}>
-                  <img src={b.cover} className="w-full aspect-[2/3] object-cover" />
-                  <div className="p-2">
-                    <p className="text-[10px] font-semibold text-ink line-clamp-2">{b.title}</p>
-                    <p className="text-[9px] text-ink-light mt-0.5">{b.author}</p>
-                  </div>
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+              {books.slice(4,13).map((b,i)=>(
+                <div key={b.id} className={`bg-white rounded-xl overflow-hidden cursor-pointer border border-stone-100 shadow-sm hover-lift anim-slide-up`} style={{animationDelay:`${i*.04}s`}} onClick={()=>go('bookdetail',b)}>
+                  <Img src={b.cover} className="w-full aspect-[2/3]"/>
+                  <div className="p-2"><p className="text-[10px] font-semibold text-ink line-clamp-2">{b.title}</p><p className="text-[9px] text-ink-light mt-0.5">{b.author}</p></div>
                 </div>
               ))}
             </div>
@@ -500,12 +588,12 @@
 
     /* ═══════ SCREEN: PERFIL ═══════ */
     const Perfil = () => {
-      const { feedPosts } = useApp();
+      const {feedPosts,go}=useApp();
       return (
-        <div className="pb-20">
+        <div className="pb-20 md:pb-4 anim-fade">
           <div className="p-4">
-            <div className="bg-white rounded-2xl p-5 text-center border border-stone-100 shadow-sm">
-              <Av name="Rayssa" size={64} />
+            <div className="bg-white rounded-2xl p-5 text-center border border-stone-100 shadow-sm anim-scale">
+              <Av name="Rayssa" size={64}/>
               <p className="font-display font-bold text-lg text-ink mt-3">Rayssa</p>
               <p className="text-xs text-ink-muted">@rayssa.reads</p>
               <div className="flex justify-center gap-8 mt-4">
@@ -513,59 +601,49 @@
                 <div className="text-center"><p className="font-bold text-ink">35</p><p className="text-[10px] text-ink-muted">Livros Lidos</p></div>
                 <div className="text-center"><p className="font-bold text-ink">182</p><p className="text-[10px] text-ink-muted">Posts</p></div>
               </div>
+              <button onClick={()=>go('settings')} className="mt-4 px-4 py-2 bg-stone-100 text-ink-light text-xs font-semibold rounded-full hover:bg-stone-200 transition press flex items-center gap-1.5 mx-auto"><I name="settings" size={14}/> Configurações</button>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 anim-slide-up anim-d1">
               <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-2">Badges</p>
               <div className="flex gap-2 overflow-x-auto no-scrollbar">
-                {badges.map((bg, i) => (
-                  <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold flex-shrink-0 ${bg.color}`}><I name={bg.icon} size={13} /> {bg.label}</div>
+                {badges.map((bg,i)=>(
+                  <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold flex-shrink-0 ${bg.color}`}><I name={bg.icon} size={13}/> {bg.label}</div>
                 ))}
               </div>
             </div>
-            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm anim-slide-up anim-d2">
               <div className="flex items-center justify-between mb-3"><p className="text-xs font-semibold text-ink-light uppercase tracking-wider">Lendo Agora</p><p className="text-[10px] text-ink-faint">{books.slice(0,5).length} livros</p></div>
               <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
-                {books.slice(0,5).map((bk, i) => {
-                  const progress = [68, 42, 15, 91, 30][i];
+                {books.slice(0,5).map((bk,i)=>{
+                  const progress=[68,42,15,91,30][i];
                   return (
-                    <div key={bk.id} className="flex-shrink-0 w-28">
-                      <img src={bk.cover} className="w-28 h-40 rounded-xl object-cover shadow-sm mb-2" />
+                    <button key={bk.id} onClick={()=>go('bookdetail',bk)} className="flex-shrink-0 w-28 text-left hover-lift press">
+                      <Img src={bk.cover} className="w-28 h-40 rounded-xl shadow-sm mb-2"/>
                       <p className="text-[11px] font-semibold text-ink truncate">{bk.title}</p>
                       <p className="text-[10px] text-ink-muted truncate">{bk.author}</p>
-                      <div className="mt-1.5 h-1.5 bg-stone-100 rounded-full overflow-hidden"><div className="h-full bg-accent-500 rounded-full" style={{ width: `${progress}%` }} /></div>
+                      <div className="mt-1.5 h-1.5 bg-stone-100 rounded-full overflow-hidden"><div className="h-full bg-accent-500 rounded-full" style={{width:`${progress}%`}}/></div>
                       <p className="text-[9px] text-ink-faint mt-0.5">{progress}% lido</p>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
             </div>
-            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm anim-slide-up anim-d3">
               <p className="text-xs font-semibold text-ink-light uppercase tracking-wider mb-3">Gêneros Lidos</p>
-              {[{genre:'Romance',pct:40,color:'bg-accent-500'},{genre:'Ficção',pct:25,color:'bg-accent-300'},{genre:'Suspense',pct:20,color:'bg-amber-400'},{genre:'Fantasia',pct:15,color:'bg-purple-400'}].map(g => (
-                <div key={g.genre} className="mb-2.5">
-                  <div className="flex justify-between text-xs mb-1"><span className="text-ink-light">{g.genre}</span><span className="text-ink-muted">{g.pct}%</span></div>
-                  <div className="h-2 bg-stone-100 rounded-full"><div className={`h-full ${g.color} rounded-full`} style={{ width: `${g.pct}%` }} /></div>
-                </div>
+              {[{genre:'Romance',pct:40,color:'bg-accent-500'},{genre:'Ficção',pct:25,color:'bg-accent-300'},{genre:'Suspense',pct:20,color:'bg-amber-400'},{genre:'Fantasia',pct:15,color:'bg-purple-400'}].map(g=>(
+                <div key={g.genre} className="mb-2.5"><div className="flex justify-between text-xs mb-1"><span className="text-ink-light">{g.genre}</span><span className="text-ink-muted">{g.pct}%</span></div>
+                <div className="h-2 bg-stone-100 rounded-full"><div className={`h-full ${g.color} rounded-full transition-all`} style={{width:`${g.pct}%`}}/></div></div>
               ))}
             </div>
-            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm anim-slide-up anim-d4">
               <p className="text-xs font-semibold text-ink-light uppercase tracking-wider mb-3">Meus Versos</p>
               <div className="space-y-3">
-                {[...feedPosts.filter(p => p.user.name === 'Ana Beatriz'), ...forumPosts.filter(p => p.user.name === 'Ana Beatriz')].map(p => (
+                {[...feedPosts.filter(p=>p.user.name==='Ana Beatriz'),...forumPosts.filter(p=>p.user.name==='Ana Beatriz')].map(p=>(
                   <div key={p.id} className="border border-stone-100 rounded-xl p-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Av name={p.user.name} size={24} />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-semibold text-ink truncate">{p.user.name}</p>
-                        <p className="text-[10px] text-ink-faint">{p.time} atrás {p.book ? `· ${p.book.title}` : ''} · {typeof p.chapter === 'number' ? `Cap. ${p.chapter}` : 'Geral'}</p>
-                      </div>
-                      {p.spoiler && <span className="text-[9px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">Spoiler</span>}
-                    </div>
+                    <div className="flex items-center gap-2 mb-2"><Av name={p.user.name} size={24}/><div className="flex-1 min-w-0"><p className="text-[11px] font-semibold text-ink truncate">{p.user.name}</p><p className="text-[10px] text-ink-faint">{p.time} atrás {p.book?`· ${p.book.title}`:''} · {typeof p.chapter==='number'?`Cap. ${p.chapter}`:'Geral'}</p></div>
+                    {p.spoiler&&<span className="text-[9px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">Spoiler</span>}</div>
                     <p className="text-sm text-ink leading-relaxed">{p.text}</p>
-                    <div className="flex items-center gap-4 mt-2 pt-2 border-t border-stone-100">
-                      <span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="heart" size={12} /> {p.likes}</span>
-                      <span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="message-circle" size={12} /> {p.replies}</span>
-                    </div>
+                    <div className="flex items-center gap-4 mt-2 pt-2 border-t border-stone-100"><span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="heart" size={12}/> {p.likes}</span><span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="message-circle" size={12}/> {p.replies}</span></div>
                   </div>
                 ))}
               </div>
@@ -575,20 +653,99 @@
       );
     };
 
+    /* ═══════ SCREEN: NOTIFICATIONS ═══════ */
+    const Notifications = () => {
+      const {goBack}=useApp();
+      const [notifs,setNotifs]=useState(sampleNotifications);
+      const markAllRead=()=>setNotifs(n=>n.map(x=>({...x,read:true})));
+      const unread=notifs.filter(n=>!n.read).length;
+      const iconFor=t=>({like:'heart',reply:'message-circle',follow:'user-plus',badge:'award'}[t]||'bell');
+      const colorFor=t=>({like:'text-rose-500 bg-rose-50',reply:'text-accent-600 bg-accent-50',follow:'text-emerald-600 bg-emerald-50',badge:'text-amber-600 bg-amber-50'}[t]||'text-ink-muted bg-stone-50');
+      return (
+        <div className="min-h-screen pb-20 md:pb-4 anim-fade">
+          <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-stone-200 sticky top-0 z-40">
+            <button onClick={goBack} className="text-ink-light press"><I name="arrow-left" size={20}/></button>
+            <p className="font-semibold text-sm text-ink">Notificações</p>
+            {unread>0?<button onClick={markAllRead} className="text-[11px] text-accent-600 font-semibold press">Marcar tudo lido</button>:<div className="w-8"/>}
+          </div>
+          <div className="p-4">
+            {unread>0&&<p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">{unread} nova{unread>1?'s':''}</p>}
+            {notifs.map((n,i)=>(
+              <div key={n.id} className={`flex items-start gap-3 p-3 rounded-xl mb-2 transition anim-slide-up ${!n.read?'bg-accent-50/50 border border-accent-100':'bg-white border border-stone-100'}`} style={{animationDelay:`${i*.04}s`}}>
+                <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${colorFor(n.type)}`}><I name={iconFor(n.type)} size={16}/></div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-ink"><span className="font-semibold">{n.user?n.user.name:'Verso'}</span> {n.text}</p>
+                  <p className="text-[10px] text-ink-muted mt-0.5">{n.time} atrás</p>
+                </div>
+                {!n.read&&<div className="w-2 h-2 bg-accent-500 rounded-full flex-shrink-0 mt-2"/>}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    /* ═══════ SCREEN: SETTINGS ═══════ */
+    const Settings = () => {
+      const {goBack}=useApp();
+      const [darkMode,setDarkMode]=useState(false);
+      const [pushNotifs,setPushNotifs]=useState(true);
+      const [spoilerWarn,setSpoilerWarn]=useState(true);
+      const Toggle=({on,onToggle})=>(
+        <button onClick={onToggle} className={`w-12 h-7 rounded-full transition relative press ${on?'bg-accent-600':'bg-stone-200'}`}>
+          <div className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow transition-all ${on?'left-[22px]':'left-0.5'}`}/>
+        </button>
+      );
+      const Item=({icon,label,desc,children})=>(
+        <div className="flex items-center justify-between py-3 border-b border-stone-100 last:border-0">
+          <div className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-stone-50 flex items-center justify-center"><I name={icon} size={17} className="text-ink-light"/></div>
+          <div><p className="text-sm font-medium text-ink">{label}</p>{desc&&<p className="text-[10px] text-ink-muted mt-0.5">{desc}</p>}</div></div>
+          {children}
+        </div>
+      );
+      return (
+        <div className="min-h-screen pb-20 md:pb-4 anim-fade">
+          <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-stone-200 sticky top-0 z-40">
+            <button onClick={goBack} className="text-ink-light press"><I name="arrow-left" size={20}/></button>
+            <p className="font-semibold text-sm text-ink">Configurações</p>
+            <div className="w-8"/>
+          </div>
+          <div className="p-4">
+            <div className="bg-white rounded-2xl px-4 border border-stone-100 shadow-sm anim-slide-up">
+              <p className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider pt-4 pb-2">Conta</p>
+              <Item icon="user" label="Editar Perfil" desc="Nome, bio, foto"><I name="chevron-right" size={16} className="text-ink-faint"/></Item>
+              <Item icon="lock" label="Privacidade" desc="Conta privada, bloqueados"><I name="chevron-right" size={16} className="text-ink-faint"/></Item>
+            </div>
+            <div className="bg-white rounded-2xl px-4 border border-stone-100 shadow-sm mt-4 anim-slide-up anim-d1">
+              <p className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider pt-4 pb-2">Preferências</p>
+              <Item icon="bell" label="Notificações Push" desc="Receber alertas no celular"><Toggle on={pushNotifs} onToggle={()=>setPushNotifs(!pushNotifs)}/></Item>
+              <Item icon="eye-off" label="Aviso de Spoiler" desc="Ocultar conteúdo com spoilers"><Toggle on={spoilerWarn} onToggle={()=>setSpoilerWarn(!spoilerWarn)}/></Item>
+              <Item icon="moon" label="Modo Escuro" desc="Em breve"><Toggle on={darkMode} onToggle={()=>setDarkMode(!darkMode)}/></Item>
+            </div>
+            <div className="bg-white rounded-2xl px-4 border border-stone-100 shadow-sm mt-4 anim-slide-up anim-d2">
+              <p className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider pt-4 pb-2">Sobre</p>
+              <Item icon="info" label="Versão do App" desc="Verso v1.0.0"><span className="text-xs text-ink-faint">v1.0.0</span></Item>
+              <Item icon="heart" label="Feito com amor" desc="Por Rayssa ♥"><span className="text-xs text-accent-600">♥</span></Item>
+            </div>
+            <button className="w-full mt-6 py-3 text-sm font-semibold text-red-500 bg-red-50 rounded-xl hover:bg-red-100 transition press anim-slide-up anim-d3">Sair da Conta</button>
+          </div>
+        </div>
+      );
+    };
+
     /* ═══════ SCREEN: USER PROFILE ═══════ */
     const UserProfile = () => {
-      const { viewUser, feedPosts, goBack } = useApp();
-      const u = viewUser;
-      if (!u) return null;
-      const userPosts = [...feedPosts.filter(p => p.user.name === u.name), ...forumPosts.filter(p => p.user.name === u.name)];
-      const readingBooks = books.slice(0, 3).map((bk, i) => ({ ...bk, progress: [72, 35, 58][i] || 50 }));
-      const userBadges = [badges[0], badges[1]];
+      const {viewUser,feedPosts,goBack}=useApp();
+      const u=viewUser;if(!u)return null;
+      const userPosts=[...feedPosts.filter(p=>p.user.name===u.name),...forumPosts.filter(p=>p.user.name===u.name)];
+      const readingBooks=books.slice(0,3).map((bk,i)=>({...bk,progress:[72,35,58][i]||50}));
+      const userBadges=[badges[0],badges[1]];
       return (
-        <div className="min-h-screen pb-20">
+        <div className="min-h-screen pb-20 md:pb-4 anim-fade">
           <div className="hero-gradient px-4 pt-4 pb-6">
-            <button onClick={goBack} className="text-white/70 mb-3"><I name="arrow-left" size={20} /></button>
-            <div className="text-center">
-              <Av name={u.name} size={72} />
+            <button onClick={goBack} className="text-white/70 mb-3 press"><I name="arrow-left" size={20}/></button>
+            <div className="text-center anim-scale">
+              <Av name={u.name} size={72}/>
               <h2 className="font-display text-xl text-white font-bold mt-3">{u.name}</h2>
               <p className="text-stone-300 text-xs">{u.handle}</p>
               <p className="text-stone-400 text-sm mt-2 max-w-xs mx-auto">{u.bio}</p>
@@ -597,54 +754,41 @@
                 <div><p className="text-lg font-bold text-white">{u.followers.toLocaleString('pt-BR')}</p><p className="text-[10px] text-stone-400">Seguidores</p></div>
                 <div><p className="text-lg font-bold text-white">{u.following}</p><p className="text-[10px] text-stone-400">Seguindo</p></div>
               </div>
-              <button className="mt-4 px-6 py-2 bg-accent-600 text-white text-sm font-semibold rounded-full hover:bg-accent-700 transition">Seguir</button>
+              <button className="mt-4 px-6 py-2 bg-accent-600 text-white text-sm font-semibold rounded-full hover:bg-accent-700 transition press">Seguir</button>
             </div>
           </div>
           <div className="p-4">
-            <div className="bg-white rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div className="bg-white rounded-2xl p-4 border border-stone-100 shadow-sm anim-slide-up">
               <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-2">Badges</p>
-              <div className="flex gap-2 flex-wrap">
-                {userBadges.map((bg, i) => (
-                  <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${bg.color}`}><I name={bg.icon} size={13} /> {bg.label}</div>
-                ))}
-              </div>
+              <div className="flex gap-2 flex-wrap">{userBadges.map((bg,i)=>(<div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${bg.color}`}><I name={bg.icon} size={13}/> {bg.label}</div>))}</div>
             </div>
-            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm anim-slide-up anim-d1">
               <p className="text-xs font-semibold text-ink-light uppercase tracking-wider mb-3">Lendo Agora</p>
               <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
-                {readingBooks.map(bk => (
+                {readingBooks.map(bk=>(
                   <div key={bk.id} className="flex-shrink-0 w-24">
-                    <img src={bk.cover} className="w-24 h-34 rounded-xl object-cover shadow-sm mb-2" />
+                    <Img src={bk.cover} className="w-24 h-34 rounded-xl shadow-sm mb-2"/>
                     <p className="text-[10px] font-semibold text-ink truncate">{bk.title}</p>
-                    <div className="mt-1 h-1.5 bg-stone-100 rounded-full overflow-hidden"><div className="h-full bg-accent-500 rounded-full" style={{ width: `${bk.progress}%` }} /></div>
+                    <div className="mt-1 h-1.5 bg-stone-100 rounded-full overflow-hidden"><div className="h-full bg-accent-500 rounded-full" style={{width:`${bk.progress}%`}}/></div>
                     <p className="text-[9px] text-ink-faint mt-0.5">{bk.progress}%</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div className="mt-4 bg-white rounded-2xl p-4 border border-stone-100 shadow-sm anim-slide-up anim-d2">
               <p className="text-xs font-semibold text-ink-light uppercase tracking-wider mb-3">Versos de {u.name.split(' ')[0]}</p>
-              {userPosts.length > 0 ? (
+              {userPosts.length>0?(
                 <div className="space-y-3">
-                  {userPosts.map(p => (
+                  {userPosts.map(p=>(
                     <div key={p.id} className="border border-stone-100 rounded-xl p-3">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Av name={p.user.name} size={24} />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[11px] font-semibold text-ink truncate">{p.user.name}</p>
-                          <p className="text-[10px] text-ink-faint">{p.time} atrás {p.book ? `· ${p.book.title}` : ''} · {typeof p.chapter === 'number' ? `Cap. ${p.chapter}` : 'Geral'}</p>
-                        </div>
-                      </div>
+                      <div className="flex items-center gap-2 mb-2"><Av name={p.user.name} size={24}/><div className="flex-1 min-w-0"><p className="text-[11px] font-semibold text-ink truncate">{p.user.name}</p><p className="text-[10px] text-ink-faint">{p.time} atrás {p.book?`· ${p.book.title}`:''} · {typeof p.chapter==='number'?`Cap. ${p.chapter}`:'Geral'}</p></div></div>
                       <p className="text-sm text-ink leading-relaxed">{p.text}</p>
-                      <div className="flex items-center gap-4 mt-2 pt-2 border-t border-stone-100">
-                        <span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="heart" size={12} /> {p.likes}</span>
-                        <span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="message-circle" size={12} /> {p.replies}</span>
-                      </div>
+                      <div className="flex items-center gap-4 mt-2 pt-2 border-t border-stone-100"><span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="heart" size={12}/> {p.likes}</span><span className="text-[11px] text-ink-muted flex items-center gap-1"><I name="message-circle" size={12}/> {p.replies}</span></div>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="text-center py-8"><I name="message-circle" size={28} className="mx-auto mb-2 text-ink-faint" /><p className="text-sm text-ink-muted">Nenhum verso ainda</p></div>
+              ):(
+                <div className="text-center py-8 anim-scale"><I name="message-circle" size={28} className="mx-auto mb-2 text-ink-faint"/><p className="text-sm text-ink-muted">Nenhum verso ainda</p></div>
               )}
             </div>
           </div>
@@ -652,18 +796,42 @@
       );
     };
 
-    /* ═══════ BOTTOM NAV ═══════ */
+    /* ═══════ BOTTOM NAV (mobile) ═══════ */
     const Nav = () => {
-      const { screen, go } = useApp();
+      const {screen,go}=useApp();
       return (
-        <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 max-w-md w-full bg-white border-t border-stone-200 flex justify-around py-2 z-50">
-          {[{id:'home',icon:'home',label:'Home'},{id:'busca',icon:'search',label:'Busca'},{id:'estante',icon:'book-open',label:'Estante'},{id:'perfil',icon:'user',label:'Perfil'}].map(t => (
-            <button key={t.id} onClick={() => go(t.id)}
-              className={`flex flex-col items-center gap-0.5 px-3 ${screen === t.id ? 'text-accent-600' : 'text-ink-faint'}`}>
-              <I name={t.icon} size={20} /><span className="text-[9px] font-medium">{t.label}</span>
+        <nav className="mobile-nav fixed bottom-0 left-1/2 -translate-x-1/2 max-w-md w-full bg-white border-t border-stone-200 flex justify-around py-2 z-50">
+          {[{id:'home',icon:'home',label:'Home'},{id:'busca',icon:'search',label:'Busca'},{id:'estante',icon:'book-open',label:'Estante'},{id:'perfil',icon:'user',label:'Perfil'}].map(t=>(
+            <button key={t.id} onClick={()=>go(t.id)} className={`flex flex-col items-center gap-0.5 px-3 transition press ${screen===t.id?'text-accent-600':'text-ink-faint hover:text-ink-muted'}`}>
+              <I name={t.icon} size={20}/><span className="text-[9px] font-medium">{t.label}</span>
             </button>
           ))}
         </nav>
+      );
+    };
+
+    /* ═══════ DESKTOP SIDEBAR ═══════ */
+    const Sidebar = () => {
+      const {screen,go}=useApp();
+      const navItems=[{id:'home',icon:'home',label:'Home'},{id:'busca',icon:'search',label:'Busca'},{id:'estante',icon:'book-open',label:'Estante'},{id:'notifications',icon:'bell',label:'Notificações'},{id:'perfil',icon:'user',label:'Perfil'},{id:'settings',icon:'settings',label:'Configurações'}];
+      return (
+        <aside className="desktop-sidebar">
+          <div className="flex items-center gap-2 mb-8 px-2">
+            <div className="w-10 h-10 rounded-full bg-navy-500 flex items-center justify-center"><I name="book-open" size={18} className="text-white"/></div>
+            <h1 className="text-xl font-display italic text-navy-500 font-bold">Verso</h1>
+          </div>
+          {navItems.map(t=>(
+            <div key={t.id} onClick={()=>go(t.id)} className={`nav-item ${screen===t.id?'active':''}`}>
+              <I name={t.icon} size={18}/>{t.label}
+            </div>
+          ))}
+          <div className="mt-auto pt-6 px-2">
+            <div className="flex items-center gap-3 px-2">
+              <Av name="Rayssa" size={34}/>
+              <div><p className="text-sm font-semibold text-ink">Rayssa</p><p className="text-[10px] text-ink-muted">@rayssa</p></div>
+            </div>
+          </div>
+        </aside>
       );
     };
 
@@ -671,88 +839,93 @@
     /*              APP                  */
     /* ══════════════════════════════════ */
     const App = () => {
-      const [screen, setScreen] = useState('home');
-      const [screenHistory, setScreenHistory] = useState([]);
-      const [tab, setTab] = useState('seguindo');
-      const [chapter, setChapter] = useState('todos');
-      const [userChapter] = useState(5);
-      const [spoiler, setSpoiler] = useState(false);
-      const [postBook, setPostBook] = useState(null);
-      const [postChapter, setPostChapter] = useState('geral');
-      const [viewUser, setViewUser] = useState(null);
-      const [feedPosts, setFeedPosts] = useState([
-        { id:1, user: users[0], book: books[0], chapter:8, text:'Gente, o capítulo 8 me destruiu completamente. Nunca esperei que o Ryle fosse capaz de algo assim. Estou em choque.', spoiler:true, likes:124, replies:45, time:'2h' },
-        { id:2, user: users[1], book: books[1], chapter:12, text:'O plot twist do capítulo 12 é absurdo. Quem mais percebeu as pistas escondidas desde o capítulo 3?', spoiler:false, likes:89, replies:32, time:'4h' },
-        { id:3, user: users[2], book: books[0], chapter:5, text:'Acabei de chegar no capítulo 5 e já estou apaixonada pela escrita. A forma como ela descreve as memórias é poesia pura.', spoiler:false, likes:67, replies:18, time:'5h' },
-        { id:4, user: users[3], book: books[0], chapter:3, text:'Só eu que já chorei 3 vezes e estou só no capítulo 3? Esse livro vai acabar comigo.', spoiler:false, likes:203, replies:61, time:'6h' },
-        { id:5, user: users[4], book: books[4], chapter:7, text:'Esse livro me fez desconfiar de todo mundo no trem da minha cidade. Paula Hawkins é genial.', spoiler:false, likes:45, replies:9, time:'7h' },
-        { id:6, user: users[5], book: books[11], chapter:3, text:'Macondo é um lugar que eu gostaria de visitar. García Márquez criou um universo inteiro com palavras.', spoiler:false, likes:156, replies:42, time:'8h' },
+      const [screen,setScreen]=useState('home');
+      const [screenHistory,setScreenHistory]=useState([]);
+      const [tab,setTab]=useState('seguindo');
+      const [chapter,setChapter]=useState('todos');
+      const [userChapter]=useState(5);
+      const [spoiler,setSpoiler]=useState(false);
+      const [postBook,setPostBook]=useState(null);
+      const [postChapter,setPostChapter]=useState('geral');
+      const [viewUser,setViewUser]=useState(null);
+      const [feedPosts,setFeedPosts]=useState([
+        {id:1,user:users[0],book:books[0],chapter:8,text:'Gente, o capítulo 8 me destruiu completamente. Nunca esperei que o Ryle fosse capaz de algo assim. Estou em choque.',spoiler:true,likes:124,replies:45,time:'2h'},
+        {id:2,user:users[1],book:books[1],chapter:12,text:'O plot twist do capítulo 12 é absurdo. Quem mais percebeu as pistas escondidas desde o capítulo 3?',spoiler:false,likes:89,replies:32,time:'4h'},
+        {id:3,user:users[2],book:books[0],chapter:5,text:'Acabei de chegar no capítulo 5 e já estou apaixonada pela escrita. A forma como ela descreve as memórias é poesia pura.',spoiler:false,likes:67,replies:18,time:'5h'},
+        {id:4,user:users[3],book:books[0],chapter:3,text:'Só eu que já chorei 3 vezes e estou só no capítulo 3? Esse livro vai acabar comigo.',spoiler:false,likes:203,replies:61,time:'6h'},
+        {id:5,user:users[4],book:books[4],chapter:7,text:'Esse livro me fez desconfiar de todo mundo no trem da minha cidade. Paula Hawkins é genial.',spoiler:false,likes:45,replies:9,time:'7h'},
+        {id:6,user:users[5],book:books[11],chapter:3,text:'Macondo é um lugar que eu gostaria de visitar. García Márquez criou um universo inteiro com palavras.',spoiler:false,likes:156,replies:42,time:'8h'},
       ]);
 
-      const go = useCallback((s, b) => { setScreenHistory(h => [...h, screen]); if(b) setPostBook(b); setScreen(s); }, [screen]);
-      const goUser = useCallback((u) => { setScreenHistory(h => [...h, screen]); setViewUser(u); setScreen('userprofile'); }, [screen]);
-      const goBack = useCallback(() => { setScreenHistory(h => { const copy = [...h]; const prev = copy.pop() || 'home'; setScreen(prev); return copy; }); }, []);
+      const go=useCallback((s,b)=>{setScreenHistory(h=>[...h,screen]);if(b)setPostBook(b);setScreen(s)},[screen]);
+      const goUser=useCallback((u)=>{setScreenHistory(h=>[...h,screen]);setViewUser(u);setScreen('userprofile')},[screen]);
+      const goBack=useCallback(()=>{setScreenHistory(h=>{const c=[...h];const prev=c.pop()||'home';setScreen(prev);return c})},[]);
 
-      const publishPost = useCallback((taRef) => {
-        const txt = taRef && taRef.current ? taRef.current.value : '';
-        if (!txt.trim()) return;
-        const b = postBook;
-        const ch = b ? (postChapter === 'geral' ? 'geral' : parseInt(postChapter)) : 'geral';
-        const newPost = { id: Date.now(), user: currentUser, book: b || { title: 'Geral', cover: '' }, chapter: ch, text: txt, spoiler, likes: 0, replies: 0, time: 'agora' };
-        setFeedPosts(prev => [newPost, ...prev]);
-        if (taRef && taRef.current) taRef.current.value = '';
-        setSpoiler(false); setPostChapter('geral'); setPostBook(null);
-        setScreenHistory([]); setScreen('home');
-      }, [postBook, postChapter, spoiler]);
+      const publishPost=useCallback((taRef)=>{
+        const txt=taRef&&taRef.current?taRef.current.value:'';
+        if(!txt.trim())return;
+        const b=postBook;
+        const ch=b?(postChapter==='geral'?'geral':parseInt(postChapter)):'geral';
+        const newPost={id:Date.now(),user:currentUser,book:b||{title:'Geral',cover:''},chapter:ch,text:txt,spoiler,likes:0,replies:0,time:'agora'};
+        setFeedPosts(prev=>[newPost,...prev]);
+        if(taRef&&taRef.current)taRef.current.value='';
+        setSpoiler(false);setPostChapter('geral');setPostBook(null);
+        setScreenHistory([]);setScreen('home');
+      },[postBook,postChapter,spoiler]);
 
-      const updatePost = useCallback((id, newText) => {
-        setFeedPosts(prev => prev.map(p => p.id === id ? { ...p, text: newText } : p));
-      }, []);
+      const updatePost=useCallback((id,newText)=>{setFeedPosts(prev=>prev.map(p=>p.id===id?{...p,text:newText}:p))},[]);
 
-      const ctx = { screen, tab, setTab, chapter, setChapter, userChapter, spoiler, setSpoiler, postBook, setPostBook, postChapter, setPostChapter, viewUser, feedPosts, go, goUser, goBack, publishPost, updatePost };
+      const ctx={screen,tab,setTab,chapter,setChapter,userChapter,spoiler,setSpoiler,postBook,setPostBook,postChapter,setPostChapter,viewUser,feedPosts,go,goUser,goBack,publishPost,updatePost};
 
-      const mainScreens = ['home','busca','estante','perfil'];
+      const mainScreens=['home','busca','estante','perfil'];
+      const unreadCount=sampleNotifications.filter(n=>!n.read).length;
       return (
         <AppCtx.Provider value={ctx}>
-          <div className="max-w-md mx-auto bg-canvas min-h-screen shadow-2xl relative">
-            {/* Header — dark navy inspired by template */}
-            {mainScreens.includes(screen) && (
-              <div className="sticky top-0 bg-navy-500 px-4 py-3 flex items-center gap-3 z-50">
-                {screen !== 'home' && <button onClick={goBack} className="text-white/70 p-1 -ml-1 hover:text-white transition"><I name="arrow-left" size={22} /></button>}
-                <div className="flex items-center gap-2 flex-1">
-                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
-                    <I name="book-open" size={16} className="text-navy-500" />
+          <div className="app-shell">
+            <Sidebar/>
+            <div className="main-content max-w-md md:max-w-none mx-auto bg-canvas min-h-screen shadow-2xl md:shadow-none relative">
+              {/* Mobile header */}
+              {mainScreens.includes(screen)&&(
+                <div className="mobile-header sticky top-0 bg-navy-500 px-4 py-3 flex items-center gap-3 z-50">
+                  {screen!=='home'&&<button onClick={goBack} className="text-white/70 p-1 -ml-1 hover:text-white transition press"><I name="arrow-left" size={22}/></button>}
+                  <div className="flex items-center gap-2 flex-1">
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center"><I name="book-open" size={16} className="text-navy-500"/></div>
+                    <h1 className="text-lg font-display italic text-white font-bold">Verso</h1>
                   </div>
-                  <h1 className="text-lg font-display italic text-white font-bold">Verso</h1>
+                  <div className="flex items-center gap-3">
+                    <button onClick={()=>go('notifications')} className="text-white/70 hover:text-white transition press relative">
+                      <I name="bell" size={18}/>
+                      {unreadCount>0&&<span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[8px] font-bold rounded-full flex items-center justify-center">{unreadCount}</span>}
+                    </button>
+                    <Av name="R" size={28}/>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <button className="text-white/70 hover:text-white transition"><I name="bell" size={18} /></button>
-                  <Av name="R" size={28} />
+              )}
+              {screen==='home'&&<Home/>}
+              {screen==='busca'&&<Busca/>}
+              {screen==='bookdetail'&&<BookDetail/>}
+              {screen==='forum'&&<Forum/>}
+              {screen==='post'&&<NovoVerso/>}
+              {screen==='estante'&&<Estante/>}
+              {screen==='perfil'&&<Perfil/>}
+              {screen==='userprofile'&&<UserProfile/>}
+              {screen==='notifications'&&<Notifications/>}
+              {screen==='settings'&&<Settings/>}
+              {screen==='home'&&(
+                <div className="sticky bottom-20 md:bottom-4 z-50 flex justify-end px-4 pointer-events-none" style={{marginTop:'-70px'}}>
+                  <button onClick={()=>{setPostBook(null);go('post')}} className="w-14 h-14 bg-accent-600 text-white rounded-full shadow-lg hover:bg-accent-700 hover:shadow-xl transition-all flex items-center justify-center pointer-events-auto press hover-lift">
+                    <I name="plus" size={24}/>
+                  </button>
                 </div>
-              </div>
-            )}
-            {screen === 'home' && <Home />}
-            {screen === 'busca' && <Busca />}
-            {screen === 'forum' && <Forum />}
-            {screen === 'post' && <NovoVerso />}
-            {screen === 'estante' && <Estante />}
-            {screen === 'perfil' && <Perfil />}
-            {screen === 'userprofile' && <UserProfile />}
-            {screen === 'home' && (
-              <div className="sticky bottom-20 z-50 flex justify-end px-4 pointer-events-none" style={{ marginTop: '-70px' }}>
-                <button onClick={() => { setPostBook(null); go('post'); }}
-                  className="w-14 h-14 bg-accent-600 text-white rounded-full shadow-lg hover:bg-accent-700 transition flex items-center justify-center pointer-events-auto">
-                  <I name="plus" size={24} />
-                </button>
-              </div>
-            )}
-            <Nav />
+              )}
+              <Nav/>
+            </div>
           </div>
         </AppCtx.Provider>
       );
     };
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
   </script>
 </body>
 </html>
