@@ -216,14 +216,32 @@
       {id:17,title:'Fahrenheit 451',author:'Ray Bradbury',cover:'https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg',rating:4.5,readers:'29.7K',chapters:12,genre:'Distopia',description:'Num mundo onde livros são proibidos, um bombeiro começa a questionar tudo.'},
       {id:18,title:'O Hobbit',author:'J.R.R. Tolkien',cover:'https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg',rating:4.8,readers:'61.5K',chapters:19,genre:'Fantasia',description:'Bilbo Baggins parte numa aventura inesperada com dragões e tesouros.'},
     ];
+    const currentUser = {name:'Rayssa',handle:'@rayssa',avatar:null,bio:'Apaixonada por livros.',followers:500,following:120,booksRead:25,joined:'Abr 2025'};
     const forumPosts = [
-      {id:10,user:users[0],chapter:5,text:'A cena do jardim nesse capítulo é uma das mais bonitas que já li. A metáfora das flores como cicatrizes me quebrou.',spoiler:false,likes:45,replies:12,time:'1h'},
-      {id:11,user:users[2],chapter:5,text:'Alguém mais notou a mudança no tom da narrativa aqui? Parece que a Lily finalmente está começando a questionar tudo.',spoiler:false,likes:32,replies:8,time:'3h'},
-      {id:12,user:users[3],chapter:5,text:'Teoria: o diário dela vai revelar algo muito maior do que parece. A pista está na página 47.',spoiler:true,likes:78,replies:23,time:'5h'},
-      {id:13,user:users[1],chapter:3,text:'O ritmo desse capítulo é perfeito. Cada parágrafo te puxa mais pra dentro da história.',spoiler:false,likes:56,replies:14,time:'2h'},
-      {id:14,user:users[0],chapter:'geral',text:'Esse livro inteiro é uma montanha-russa emocional. Colleen Hoover realmente sabe como fazer a gente sentir tudo.',spoiler:false,likes:112,replies:38,time:'30min'},
-      {id:15,user:users[3],chapter:'geral',text:'Comecei ontem e não consigo parar de ler. Alguém mais passou por isso?',spoiler:false,likes:95,replies:27,time:'1h'},
-      {id:16,user:users[2],chapter:'geral',text:'A capa do livro é linda, mas não faz jus ao peso emocional da história. Recomendo muito.',spoiler:false,likes:64,replies:11,time:'4h'},
+      {id:10,user:users[0],chapter:5,text:'A cena do jardim nesse capítulo é uma das mais bonitas que já li. A metáfora das flores como cicatrizes me quebrou.',spoiler:false,likes:45,replies:12,time:'1h',replyList:[
+        {id:1001,user:users[2],text:'@ana_livros Sim! Essa metáfora me pegou de surpresa. Chorei muito nessa parte.',time:'45min',likes:8},
+        {id:1002,user:users[1],text:'@ana_livros @mari_reads A escrita da Colleen é absurda nesse trecho. Poesia pura.',time:'30min',likes:5},
+        {id:1003,user:currentUser,text:'@ana_livros Concordo! Esse capítulo é de longe o mais emocional até agora.',time:'15min',likes:3},
+      ]},
+      {id:11,user:users[2],chapter:5,text:'Alguém mais notou a mudança no tom da narrativa aqui? Parece que a Lily finalmente está começando a questionar tudo.',spoiler:false,likes:32,replies:8,time:'3h',replyList:[
+        {id:1101,user:users[4],text:'@mari_reads Sim, é um ponto de virada claro. A partir daqui muda tudo.',time:'2h',likes:6},
+      ]},
+      {id:12,user:users[3],chapter:5,text:'Teoria: o diário dela vai revelar algo muito maior do que parece. A pista está na página 47.',spoiler:true,likes:78,replies:23,time:'5h',replyList:[
+        {id:1201,user:users[0],text:'@juliat OMG acabei de reler a página 47 e agora faz TOTAL sentido!',time:'4h',likes:15},
+        {id:1202,user:users[5],text:'@juliat @ana_livros Vocês estão me convencendo a reler tudo desde o início.',time:'3h',likes:7},
+      ]},
+      {id:13,user:users[1],chapter:3,text:'O ritmo desse capítulo é perfeito. Cada parágrafo te puxa mais pra dentro da história.',spoiler:false,likes:56,replies:14,time:'2h',replyList:[
+        {id:1301,user:users[3],text:'@carlos_lit Exatamente! Não consegui largar o livro nesse capítulo.',time:'1h',likes:9},
+      ]},
+      {id:14,user:users[0],chapter:'geral',text:'Esse livro inteiro é uma montanha-russa emocional. Colleen Hoover realmente sabe como fazer a gente sentir tudo.',spoiler:false,likes:112,replies:38,time:'30min',replyList:[
+        {id:1401,user:users[2],text:'@ana_livros É impossível ficar indiferente a essa história. Cada capítulo é uma emoção diferente.',time:'20min',likes:12},
+        {id:1402,user:users[4],text:'@ana_livros Meu livro favorito dela, sem dúvidas.',time:'10min',likes:8},
+      ]},
+      {id:15,user:users[3],chapter:'geral',text:'Comecei ontem e não consigo parar de ler. Alguém mais passou por isso?',spoiler:false,likes:95,replies:27,time:'1h',replyList:[
+        {id:1501,user:currentUser,text:'@juliat Eu li inteiro em um dia! Impossível parar.',time:'45min',likes:14},
+        {id:1502,user:users[0],text:'@juliat @rayssa Eu também! A gente deveria criar um clube do livro pra isso.',time:'30min',likes:10},
+      ]},
+      {id:16,user:users[2],chapter:'geral',text:'A capa do livro é linda, mas não faz jus ao peso emocional da história. Recomendo muito.',spoiler:false,likes:64,replies:11,time:'4h',replyList:[]},
     ];
     const badges = [
       {icon:'lightbulb',label:'Teorista do Cap. 5',color:'bg-amber-100 text-amber-700'},
@@ -231,7 +249,6 @@
       {icon:'flag',label:'Primeiro a Chegar',color:'bg-accent-100 text-accent-700'},
       {icon:'flame',label:'Debate Aceso',color:'bg-red-100 text-red-600'},
     ];
-    const currentUser = {name:'Rayssa',handle:'@rayssa',avatar:null,bio:'Apaixonada por livros.',followers:500,following:120,booksRead:25,joined:'Abr 2025'};
     const MAX = 40000;
     const genres = ['Todos','Romance','Ficção','Suspense','Distopia','Fantasia','Clássico'];
 
@@ -277,27 +294,63 @@
     /*   COMPONENTS (defined outside App)*/
     /* ══════════════════════════════════ */
 
+    /* ═══════ RENDER TEXT WITH @MENTIONS ═══════ */
+    const MentionText = ({text,goUser:gu}) => {
+      if(!text)return null;
+      const parts=text.split(/(@\w+)/g);
+      return <React.Fragment>{parts.map((part,i)=>{
+        if(part.startsWith('@')){
+          const handle=part;
+          const found=[...users,currentUser].find(u=>u.handle===handle);
+          return <button key={i} onClick={(e)=>{e.stopPropagation();if(found)gu(found)}} className="text-accent-600 font-semibold hover:underline">{part}</button>;
+        }
+        return <span key={i}>{part}</span>;
+      })}</React.Fragment>;
+    };
+
     /* ═══════ POST CARD ═══════ */
-    const PostCard = ({p,showBookCtx=true,delay=0}) => {
-      const {go,goUser,updatePost}=useApp();
+    const PostCard = ({p,showBookCtx=true,delay=0,inForum=false}) => {
+      const {go,goUser,updatePost,setChapter}=useApp();
       const [liked,setLiked]=useState(false);
       const [following,setFollowing]=useState(true);
       const [showSpoiler,setShowSpoiler]=useState(false);
       const [editing,setEditing]=useState(false);
       const [likeAnim,setLikeAnim]=useState(false);
+      const [showReplies,setShowReplies]=useState(inForum);
+      const [replyText,setReplyText]=useState('');
+      const [replies,setReplies]=useState(p.replyList||[]);
+      const [replyTo,setReplyTo]=useState(null);
+      const replyRef=useRef(null);
       const editRef=useRef(null);
       const isOwner=p.user.handle===currentUser.handle;
       const handleSave=()=>{const val=editRef.current?editRef.current.value.trim():'';if(val&&val!==p.text)updatePost(p.id,val);setEditing(false)};
       const handleLike=()=>{setLiked(!liked);if(!liked){setLikeAnim(true);setTimeout(()=>setLikeAnim(false),400)}};
+      const goForum=()=>{if(p.book&&p.book.cover){if(typeof p.chapter==='number')setChapter(p.chapter);else setChapter('todos');go('forum',p.book)}};
+      const stop=(e)=>e.stopPropagation();
+      const openReply=(targetUser)=>{
+        if(!inForum){goForum();return;}
+        setShowReplies(true);
+        setReplyTo(targetUser||p.user);
+        const mention=targetUser?targetUser.handle:p.user.handle;
+        setReplyText(`${mention} `);
+        setTimeout(()=>{if(replyRef.current){replyRef.current.focus();replyRef.current.selectionStart=replyRef.current.value.length}},100);
+      };
+      const submitReply=()=>{
+        const txt=replyText.trim();if(!txt)return;
+        const newReply={id:Date.now(),user:currentUser,text:txt,time:'agora',likes:0};
+        setReplies(prev=>[...prev,newReply]);
+        setReplyText('');setReplyTo(null);
+      };
+      const replyCount=p.replies+(replies.length-(p.replyList||[]).length);
       return (
-        <div className={`bg-white rounded-2xl p-4 mb-3 border border-stone-100 shadow-sm hover-lift anim-slide-up`} style={{animationDelay:`${delay}s`}}>
+        <div onClick={inForum?undefined:goForum} className={`bg-white rounded-2xl p-4 mb-3 border border-stone-100 shadow-sm hover-lift anim-slide-up ${inForum?'':'cursor-pointer'}`} style={{animationDelay:`${delay}s`}}>
           <div className="flex gap-3">
             <Av name={p.user.name} size={36}/>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <button onClick={()=>goUser(p.user)} className="font-semibold text-sm text-ink hover:text-accent-600 transition press">{p.user.name}</button>
+                <button onClick={(e)=>{stop(e);goUser(p.user)}} className="font-semibold text-sm text-ink hover:text-accent-600 transition press">{p.user.name}</button>
                 <span className="text-ink-muted text-xs hidden xs:inline">{p.user.handle}</span>
-                <button onClick={()=>setFollowing(!following)}
+                <button onClick={(e)=>{stop(e);setFollowing(!following)}}
                   className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition press ${following?'bg-stone-100 text-ink-muted hover:bg-red-50 hover:text-red-500':'bg-accent-600 text-white hover:bg-accent-700'}`}>
                   {following?'Seguindo':'Seguir'}
                 </button>
@@ -310,32 +363,105 @@
               )}
               {!showBookCtx&&<p className="text-[11px] text-accent-600 font-medium mt-0.5">{typeof p.chapter==='number'?`Capítulo ${p.chapter}`:'Geral'}</p>}
               {editing?(
-                <div className="mt-2 anim-scale">
+                <div className="mt-2 anim-scale" onClick={stop}>
                   <textarea ref={editRef} defaultValue={p.text} className="w-full bg-white border border-accent-300 rounded-lg px-3 py-2 text-[13px] text-ink outline-none resize-none leading-relaxed focus:border-accent-500 focus:ring-2 focus:ring-accent-100" rows="4" autoFocus/>
                   <div className="flex items-center gap-2 mt-2">
-                    <button onClick={handleSave} className="text-[11px] font-semibold px-3 py-1 bg-accent-600 text-white rounded-full hover:bg-accent-700 transition press">Salvar</button>
-                    <button onClick={()=>setEditing(false)} className="text-[11px] font-semibold px-3 py-1 bg-stone-100 text-ink-muted rounded-full hover:bg-stone-200 transition press">Cancelar</button>
+                    <button onClick={(e)=>{stop(e);handleSave()}} className="text-[11px] font-semibold px-3 py-1 bg-accent-600 text-white rounded-full hover:bg-accent-700 transition press">Salvar</button>
+                    <button onClick={(e)=>{stop(e);setEditing(false)}} className="text-[11px] font-semibold px-3 py-1 bg-stone-100 text-ink-muted rounded-full hover:bg-stone-200 transition press">Cancelar</button>
                   </div>
                 </div>
               ):p.spoiler&&!showSpoiler?(
                 <div className="mt-2 bg-stone-50 border border-stone-200 rounded-lg p-3 flex items-center justify-between anim-fade">
                   <div className="flex items-center gap-2 text-xs text-ink-light"><I name="eye-off" size={14} className="text-spoiler"/><span>Contém spoiler</span></div>
-                  <button onClick={()=>setShowSpoiler(true)} className="text-xs text-accent-600 font-semibold hover:text-accent-700 press">Revelar</button>
+                  <button onClick={(e)=>{stop(e);setShowSpoiler(true)}} className="text-xs text-accent-600 font-semibold hover:text-accent-700 press">Revelar</button>
                 </div>
               ):(
-                <p className="mt-2 text-[13px] text-ink leading-relaxed anim-fade">
-                  {p.spoiler&&<span className="inline-flex items-center gap-1 text-[10px] text-spoiler font-semibold uppercase tracking-wide mr-1.5"><I name="alert-triangle" size={10} className="text-spoiler"/>Spoiler</span>}
-                  {p.text}
-                </p>
+                <React.Fragment>
+                  {p.text&&<p className="mt-2 text-[13px] text-ink leading-relaxed anim-fade">
+                    {p.spoiler&&<span className="inline-flex items-center gap-1 text-[10px] text-spoiler font-semibold uppercase tracking-wide mr-1.5"><I name="alert-triangle" size={10} className="text-spoiler"/>Spoiler</span>}
+                    <MentionText text={p.text} goUser={goUser}/>
+                  </p>}
+                  {p.media&&p.media.length>0&&(
+                    <div className={`mt-2.5 grid gap-1.5 rounded-xl overflow-hidden ${p.media.length===1?'grid-cols-1':p.media.length===2?'grid-cols-2':'grid-cols-2'}`}>
+                      {p.media.map((m,mi)=>(
+                        <div key={m.id||mi} className={`relative ${p.media.length===3&&mi===0?'col-span-2':''}`}>
+                          {m.type==='image'?(
+                            <img src={m.url} className={`w-full object-cover rounded-lg ${p.media.length===1?'max-h-72':'h-36'}`} loading="lazy"/>
+                          ):(
+                            <video src={m.url} controls className={`w-full object-cover rounded-lg ${p.media.length===1?'max-h-72':'h-36'}`}/>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </React.Fragment>
               )}
+              {/* Action bar */}
               <div className="flex items-center gap-5 mt-3">
-                <button onClick={handleLike} className={`flex items-center gap-1 text-xs transition press ${liked?'text-rose-500':'text-ink-muted hover:text-rose-400'}`}>
+                <button onClick={(e)=>{stop(e);handleLike()}} className={`flex items-center gap-1 text-xs transition press ${liked?'text-rose-500':'text-ink-muted hover:text-rose-400'}`}>
                   <span className={likeAnim?'anim-pop':''}><I name="heart" size={14} fill={liked}/></span> {p.likes+(liked?1:0)}
                 </button>
-                <button className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition press"><I name="message-circle" size={14}/> {p.replies}</button>
-                {isOwner&&!editing&&(<button onClick={()=>setEditing(true)} className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition press"><I name="pencil" size={14}/></button>)}
-                <button className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition ml-auto press"><I name="bookmark" size={14}/></button>
+                <button onClick={(e)=>{stop(e);openReply()}} className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition press"><I name="message-circle" size={14}/> {replyCount}</button>
+                {isOwner&&!editing&&(<button onClick={(e)=>{stop(e);setEditing(true)}} className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition press"><I name="pencil" size={14}/></button>)}
+                <button onClick={stop} className="flex items-center gap-1 text-xs text-ink-muted hover:text-accent-600 transition ml-auto press"><I name="bookmark" size={14}/></button>
               </div>
+              {/* Replies section — only in forum */}
+              {inForum&&(
+                <React.Fragment>
+                  {replies.length>0&&!showReplies&&(
+                    <button onClick={(e)=>{stop(e);setShowReplies(true)}} className="mt-2.5 text-[11px] text-accent-600 font-semibold hover:text-accent-700 transition press flex items-center gap-1">
+                      <I name="corner-down-right" size={12}/>
+                      Ver {replies.length} resposta{replies.length>1?'s':''}
+                    </button>
+                  )}
+                  {showReplies&&(
+                    <div className="mt-3 space-y-2.5 anim-slide-up" onClick={stop}>
+                      {replies.map((r,ri)=>(
+                        <div key={r.id} className="flex gap-2.5 anim-slide-up" style={{animationDelay:`${ri*.04}s`}}>
+                          <Av name={r.user.name} size={28}/>
+                          <div className="flex-1 min-w-0 bg-stone-50 rounded-xl px-3 py-2.5 border border-stone-100">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <button onClick={(e)=>{stop(e);goUser(r.user)}} className="font-semibold text-[12px] text-ink hover:text-accent-600 transition">{r.user.name}</button>
+                              <span className="text-[10px] text-ink-faint">{r.time}</span>
+                            </div>
+                            <p className="text-[12px] text-ink leading-relaxed mt-0.5"><MentionText text={r.text} goUser={goUser}/></p>
+                            <div className="flex items-center gap-3 mt-1.5">
+                              <button className="text-[10px] text-ink-muted hover:text-rose-400 transition flex items-center gap-1 press"><I name="heart" size={11}/> {r.likes}</button>
+                              <button onClick={()=>openReply(r.user)} className="text-[10px] text-ink-muted hover:text-accent-600 transition flex items-center gap-1 press"><I name="corner-up-left" size={11}/> Responder</button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                      {/* Reply input */}
+                      <div className="flex gap-2.5 items-start mt-1">
+                        <Av name={currentUser.name} size={28}/>
+                        <div className="flex-1 min-w-0">
+                          {replyTo&&(
+                            <div className="flex items-center gap-1.5 mb-1.5">
+                              <span className="text-[10px] text-ink-muted">Respondendo a</span>
+                              <span className="text-[10px] text-accent-600 font-semibold">{replyTo.handle}</span>
+                              <button onClick={()=>{setReplyTo(null);setReplyText('')}} className="text-ink-faint hover:text-ink-muted transition"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                            </div>
+                          )}
+                          <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-xl overflow-hidden focus-within:border-accent-400 focus-within:ring-2 focus-within:ring-accent-100 transition">
+                            <input ref={replyRef} value={replyText} onChange={e=>setReplyText(e.target.value)}
+                              onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submitReply()}}}
+                              placeholder="Escreva uma resposta..."
+                              className="flex-1 px-3 py-2 text-[12px] text-ink bg-transparent outline-none placeholder-ink-faint"/>
+                            <button onClick={submitReply} disabled={!replyText.trim()}
+                              className={`px-3 py-2 text-[11px] font-semibold transition press ${replyText.trim()?'text-accent-600 hover:text-accent-700':'text-ink-faint'}`}>
+                              <I name="send" size={14}/>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      {replies.length>0&&(
+                        <button onClick={()=>setShowReplies(false)} className="text-[10px] text-ink-muted hover:text-ink-light transition press">Ocultar respostas</button>
+                      )}
+                    </div>
+                  )}
+                </React.Fragment>
+              )}
             </div>
           </div>
         </div>
@@ -542,12 +668,16 @@
 
     /* ═══════ SCREEN: FÓRUM ═══════ */
     const Forum = () => {
-      const {postBook,userChapter,chapter,setChapter,go,goBack,setPostBook}=useApp();
+      const {postBook,userChapter,chapter,setChapter,go,goBack,setPostBook,feedPosts}=useApp();
       const b=postBook||books[0];
       const locked=(ch)=>ch>userChapter;
       const chapNums=[];
       for(let i=1;i<=b.chapters;i++){if(i<=3||i>=b.chapters-1||(typeof chapter==='number'&&(i===chapter||Math.abs(i-chapter)<=1)))chapNums.push(i);else if(chapNums[chapNums.length-1]!=='...')chapNums.push('...')}
-      const chPosts=chapter==='todos'?forumPosts:chapter==='geral'?forumPosts.filter(p=>p.chapter==='geral'):forumPosts.filter(p=>p.chapter===chapter);
+      const bookFeedPosts=feedPosts.filter(p=>p.book&&p.book.id===b.id);
+      const baseForumPosts=b.id===books[0].id?forumPosts:[];
+      const forumIds=new Set(baseForumPosts.map(p=>p.id));
+      const allPosts=[...baseForumPosts,...bookFeedPosts.filter(p=>!forumIds.has(p.id))];
+      const chPosts=chapter==='todos'?allPosts:chapter==='geral'?allPosts.filter(p=>p.chapter==='geral'):allPosts.filter(p=>p.chapter===chapter);
       const teaserLabel=chapter==='todos'?'este livro':chapter==='geral'?'discussões gerais':`Capítulo ${chapter}`;
       const tabBtn=(id,label)=>(
         <button key={id} onClick={()=>setChapter(id)}
@@ -595,7 +725,7 @@
             <button onClick={()=>{setPostBook(b);go('post')}} className="flex items-center gap-1.5 px-3 py-1.5 bg-accent-600 text-white text-[11px] font-semibold rounded-full hover:bg-accent-700 transition press"><I name="plus" size={13}/> Compartilhar</button>
           </div>
           <div className="p-4 flex-1">
-            {chPosts.length>0?chPosts.map((p,i)=><PostCard key={p.id} p={{...p,book:b}} showBookCtx={false} delay={i*.06}/>):(
+            {chPosts.length>0?chPosts.map((p,i)=><PostCard key={p.id} p={{...p,book:b}} showBookCtx={false} delay={i*.06} inForum={true}/>):(
               <div className="text-center py-12 text-ink-muted anim-scale">
                 <I name="message-circle" size={32} className="mx-auto mb-3 text-ink-faint"/>
                 <p className="text-sm font-medium">Nenhum post aqui ainda</p>
@@ -611,8 +741,21 @@
     const NovoVerso = () => {
       const {postBook,postChapter,setPostChapter,spoiler,setSpoiler,publishPost,goBack}=useApp();
       const [len,setLen]=useState(0);
+      const [media,setMedia]=useState([]);
       const taRef=useRef(null);
+      const fileRef=useRef(null);
       useEffect(()=>{if(taRef.current)taRef.current.focus()},[]);
+      const handleFiles=(e)=>{
+        const files=Array.from(e.target.files||[]);
+        files.forEach(f=>{
+          if(!f.type.startsWith('image/')&&!f.type.startsWith('video/'))return;
+          const reader=new FileReader();
+          reader.onload=(ev)=>setMedia(prev=>[...prev,{id:Date.now()+Math.random(),type:f.type.startsWith('video')?'video':'image',url:ev.target.result,name:f.name}]);
+          reader.readAsDataURL(f);
+        });
+        e.target.value='';
+      };
+      const removeMedia=(id)=>setMedia(prev=>prev.filter(m=>m.id!==id));
       const b=postBook;
       return (
         <div className="min-h-screen flex flex-col pb-20 md:pb-4 anim-fade">
@@ -621,9 +764,9 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
             <p className="font-semibold text-sm text-ink">Novo Verso</p>
-            <button onClick={()=>publishPost(taRef)}
-              className={`text-sm font-semibold px-4 py-1.5 rounded-full transition press ${len>0?'bg-accent-600 text-white hover:bg-accent-700':'bg-stone-100 text-ink-faint cursor-not-allowed'}`}
-              disabled={!len}>Publicar</button>
+            <button onClick={()=>publishPost(taRef,media)}
+              className={`text-sm font-semibold px-4 py-1.5 rounded-full transition press ${(len>0||media.length>0)?'bg-accent-600 text-white hover:bg-accent-700':'bg-stone-100 text-ink-faint cursor-not-allowed'}`}
+              disabled={!len&&media.length===0}>Publicar</button>
           </div>
           <div className="p-4 space-y-5 flex-1">
             {b&&(
@@ -652,6 +795,32 @@
                 className="w-full bg-white border border-stone-200 rounded-xl px-4 py-4 text-sm text-ink placeholder-ink-faint outline-none resize-none leading-relaxed focus:border-accent-400 focus:ring-2 focus:ring-accent-100 transition" rows="6"/>
               <p className="text-[10px] text-ink-faint text-right mt-1">{(MAX-len).toLocaleString('pt-BR')} caracteres restantes</p>
             </div>
+            {/* Media toolbar */}
+            <div className="flex items-center gap-2 anim-slide-up anim-d2">
+              <input ref={fileRef} type="file" accept="image/*,video/*" multiple className="hidden" onChange={handleFiles}/>
+              <button onClick={()=>fileRef.current&&fileRef.current.click()} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm text-ink-light hover:bg-stone-50 hover:border-accent-300 transition press">
+                <I name="image" size={18} className="text-accent-500"/>
+                <span>Foto / Vídeo</span>
+              </button>
+              {media.length>0&&<span className="text-[11px] text-ink-muted">{media.length} arquivo{media.length>1?'s':''}</span>}
+            </div>
+            {/* Media preview */}
+            {media.length>0&&(
+              <div className="grid grid-cols-2 gap-2 anim-scale">
+                {media.map(m=>(
+                  <div key={m.id} className="relative group rounded-xl overflow-hidden border border-stone-200">
+                    {m.type==='image'?(
+                      <img src={m.url} className="w-full h-32 object-cover"/>
+                    ):(
+                      <video src={m.url} className="w-full h-32 object-cover"/>
+                    )}
+                    <button onClick={()=>removeMedia(m.id)} className="absolute top-1.5 right-1.5 w-7 h-7 bg-black/60 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-black/80 press">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="flex items-center justify-between bg-white border border-stone-200 rounded-xl px-4 py-3 anim-slide-up anim-d3">
               <div className="flex items-center gap-2.5">
                 <I name="eye-off" size={16} className={spoiler?'text-spoiler':'text-ink-muted'}/>
@@ -896,15 +1065,25 @@
         return convo?[...convo.messages]:[];
       });
       const [inputVal,setInputVal]=useState('');
+      const [chatMedia,setChatMedia]=useState(null);
       const inputRef=useRef(null);
+      const chatFileRef=useRef(null);
       const bottomRef=useRef(null);
       const u=chatUser;
       useEffect(()=>{if(bottomRef.current)bottomRef.current.scrollIntoView({behavior:'smooth'})},[messages]);
       if(!u)return null;
+      const handleChatFile=(e)=>{
+        const f=e.target.files&&e.target.files[0];if(!f)return;
+        const reader=new FileReader();
+        reader.onload=(ev)=>setChatMedia({type:f.type.startsWith('video')?'video':'image',url:ev.target.result});
+        reader.readAsDataURL(f);
+        e.target.value='';
+      };
       const sendMessage=()=>{
-        const txt=inputVal.trim();if(!txt)return;
-        setMessages(prev=>[...prev,{id:Date.now(),from:'me',text:txt,time:'agora'}]);
-        setInputVal('');
+        const txt=inputVal.trim();
+        if(!txt&&!chatMedia)return;
+        setMessages(prev=>[...prev,{id:Date.now(),from:'me',text:txt||'',time:'agora',media:chatMedia||null}]);
+        setInputVal('');setChatMedia(null);
         if(inputRef.current)inputRef.current.focus();
       };
       const handleKeyDown=(e)=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}};
@@ -925,24 +1104,49 @@
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2">
             {messages.map((m,i)=>(
               <div key={m.id} className={`flex ${m.from==='me'?'justify-end':'justify-start'} anim-slide-up`} style={{animationDelay:`${i*.03}s`}}>
-                <div className={`max-w-[75%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${m.from==='me'?'bg-accent-600 text-white rounded-br-md':'bg-white text-ink border border-stone-100 rounded-bl-md shadow-sm'}`}>
-                  <p>{m.text}</p>
-                  <p className={`text-[9px] mt-1 ${m.from==='me'?'text-white/60':'text-ink-faint'}`}>{m.time}</p>
+                <div className={`max-w-[75%] rounded-2xl text-sm leading-relaxed overflow-hidden ${m.from==='me'?'bg-accent-600 text-white rounded-br-md':'bg-white text-ink border border-stone-100 rounded-bl-md shadow-sm'}`}>
+                  {m.media&&(
+                    m.media.type==='image'?
+                      <img src={m.media.url} className="w-full max-h-52 object-cover" loading="lazy"/>:
+                      <video src={m.media.url} controls className="w-full max-h-52 object-cover"/>
+                  )}
+                  {m.text&&<p className="px-3.5 py-2.5">{m.text}</p>}
+                  {!m.text&&m.media&&<div className="px-3.5 pb-2 pt-1"/>}
+                  <p className={`text-[9px] px-3.5 pb-2 ${m.from==='me'?'text-white/60':'text-ink-faint'}`}>{m.time}</p>
                 </div>
               </div>
             ))}
             <div ref={bottomRef}/>
           </div>
           {/* Input */}
-          <div className="sticky bottom-0 bg-white border-t border-stone-200 px-4 py-3 flex items-end gap-2">
-            <div className="flex-1 bg-stone-50 rounded-2xl border border-stone-200 px-4 py-2.5 flex items-end gap-2 focus-within:border-accent-400 focus-within:ring-2 focus-within:ring-accent-100 transition">
-              <input ref={inputRef} value={inputVal} onChange={e=>setInputVal(e.target.value)} onKeyDown={handleKeyDown}
-                placeholder="Digite uma mensagem..." className="flex-1 bg-transparent outline-none text-sm text-ink placeholder-ink-faint"/>
+          <div className="sticky bottom-0 bg-white border-t border-stone-200">
+            {chatMedia&&(
+              <div className="px-4 pt-3 pb-1">
+                <div className="relative inline-block rounded-xl overflow-hidden border border-stone-200">
+                  {chatMedia.type==='image'?
+                    <img src={chatMedia.url} className="h-20 w-auto rounded-xl object-cover"/>:
+                    <video src={chatMedia.url} className="h-20 w-auto rounded-xl object-cover"/>
+                  }
+                  <button onClick={()=>setChatMedia(null)} className="absolute top-1 right-1 w-6 h-6 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-black/80 press">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="px-4 py-3 flex items-end gap-2">
+              <input ref={chatFileRef} type="file" accept="image/*,video/*" className="hidden" onChange={handleChatFile}/>
+              <button onClick={()=>chatFileRef.current&&chatFileRef.current.click()} className="w-10 h-10 rounded-full flex items-center justify-center bg-stone-50 text-ink-muted hover:bg-stone-100 hover:text-accent-500 transition press flex-shrink-0">
+                <I name="image" size={18}/>
+              </button>
+              <div className="flex-1 bg-stone-50 rounded-2xl border border-stone-200 px-4 py-2.5 flex items-end gap-2 focus-within:border-accent-400 focus-within:ring-2 focus-within:ring-accent-100 transition">
+                <input ref={inputRef} value={inputVal} onChange={e=>setInputVal(e.target.value)} onKeyDown={handleKeyDown}
+                  placeholder="Digite uma mensagem..." className="flex-1 bg-transparent outline-none text-sm text-ink placeholder-ink-faint"/>
+              </div>
+              <button onClick={sendMessage} disabled={!inputVal.trim()&&!chatMedia}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition press flex-shrink-0 ${(inputVal.trim()||chatMedia)?'bg-accent-600 text-white hover:bg-accent-700':'bg-stone-100 text-ink-faint'}`}>
+                <I name="send" size={18}/>
+              </button>
             </div>
-            <button onClick={sendMessage} disabled={!inputVal.trim()}
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition press ${inputVal.trim()?'bg-accent-600 text-white hover:bg-accent-700':'bg-stone-100 text-ink-faint'}`}>
-              <I name="send" size={18}/>
-            </button>
           </div>
         </div>
       );
@@ -1070,24 +1274,37 @@
       useEffect(()=>{document.documentElement.classList.toggle('dark',darkMode)},[darkMode]);
       const [viewUser,setViewUser]=useState(null);
       const [feedPosts,setFeedPosts]=useState([
-        {id:1,user:users[0],book:books[0],chapter:8,text:'Gente, o capítulo 8 me destruiu completamente. Nunca esperei que o Ryle fosse capaz de algo assim. Estou em choque.',spoiler:true,likes:124,replies:45,time:'2h'},
-        {id:2,user:users[1],book:books[1],chapter:12,text:'O plot twist do capítulo 12 é absurdo. Quem mais percebeu as pistas escondidas desde o capítulo 3?',spoiler:false,likes:89,replies:32,time:'4h'},
-        {id:3,user:users[2],book:books[0],chapter:5,text:'Acabei de chegar no capítulo 5 e já estou apaixonada pela escrita. A forma como ela descreve as memórias é poesia pura.',spoiler:false,likes:67,replies:18,time:'5h'},
-        {id:4,user:users[3],book:books[0],chapter:3,text:'Só eu que já chorei 3 vezes e estou só no capítulo 3? Esse livro vai acabar comigo.',spoiler:false,likes:203,replies:61,time:'6h'},
-        {id:5,user:users[4],book:books[4],chapter:7,text:'Esse livro me fez desconfiar de todo mundo no trem da minha cidade. Paula Hawkins é genial.',spoiler:false,likes:45,replies:9,time:'7h'},
-        {id:6,user:users[5],book:books[11],chapter:3,text:'Macondo é um lugar que eu gostaria de visitar. García Márquez criou um universo inteiro com palavras.',spoiler:false,likes:156,replies:42,time:'8h'},
+        {id:1,user:users[0],book:books[0],chapter:8,text:'Gente, o capítulo 8 me destruiu completamente. Nunca esperei que o Ryle fosse capaz de algo assim. Estou em choque.',spoiler:true,likes:124,replies:45,time:'2h',replyList:[
+          {id:101,user:users[2],text:'@ana_livros Concordo! Esse capítulo mudou tudo pra mim também 😢',time:'1h',likes:12},
+          {id:102,user:users[3],text:'@ana_livros @mari_reads Gente, eu quase larguei o livro ali. Muito pesado!',time:'50min',likes:8},
+        ]},
+        {id:2,user:users[1],book:books[1],chapter:12,text:'O plot twist do capítulo 12 é absurdo. Quem mais percebeu as pistas escondidas desde o capítulo 3?',spoiler:false,likes:89,replies:32,time:'4h',replyList:[
+          {id:201,user:users[4],text:'@carlos_lit Eu notei! A parte do bilhete já denunciava tudo.',time:'3h',likes:15},
+          {id:202,user:currentUser,text:'@carlos_lit Relendo agora e as pistas são tão óbvias! Como não vi antes?',time:'2h',likes:6},
+          {id:203,user:users[1],text:'@rayssa Exato! É genial como o autor esconde em plena vista.',time:'1h',likes:4},
+        ]},
+        {id:3,user:users[2],book:books[0],chapter:5,text:'Acabei de chegar no capítulo 5 e já estou apaixonada pela escrita. A forma como ela descreve as memórias é poesia pura.',spoiler:false,likes:67,replies:18,time:'5h',replyList:[
+          {id:301,user:users[0],text:'@mari_reads A escrita da Colleen é incrível mesmo! Prepara o coração ❤️',time:'4h',likes:9},
+        ]},
+        {id:4,user:users[3],book:books[0],chapter:3,text:'Só eu que já chorei 3 vezes e estou só no capítulo 3? Esse livro vai acabar comigo.',spoiler:false,likes:203,replies:61,time:'6h',replyList:[]},
+        {id:5,user:users[4],book:books[4],chapter:7,text:'Esse livro me fez desconfiar de todo mundo no trem da minha cidade. Paula Hawkins é genial.',spoiler:false,likes:45,replies:9,time:'7h',replyList:[]},
+        {id:6,user:users[5],book:books[11],chapter:3,text:'Macondo é um lugar que eu gostaria de visitar. García Márquez criou um universo inteiro com palavras.',spoiler:false,likes:156,replies:42,time:'8h',replyList:[
+          {id:601,user:users[2],text:'@pedro_fantasia Macondo vive na minha cabeça até hoje. Realismo mágico no seu melhor!',time:'7h',likes:22},
+          {id:602,user:users[0],text:'@pedro_fantasia @mari_reads Leitura obrigatória! Cada página é uma viagem.',time:'6h',likes:11},
+        ]},
       ]);
 
-      const go=useCallback((s,b)=>{setScreenHistory(h=>[...h,screen]);if(b)setPostBook(b);setScreen(s)},[screen]);
-      const goUser=useCallback((u)=>{setScreenHistory(h=>[...h,screen]);setViewUser(u);setScreen('userprofile')},[screen]);
-      const goBack=useCallback(()=>{setScreenHistory(h=>{const c=[...h];const prev=c.pop()||'home';setScreen(prev);return c})},[]);
+      const go=useCallback((s,b)=>{setScreenHistory(h=>[...h,screen]);if(b)setPostBook(b);setScreen(s);window.scrollTo(0,0)},[screen]);
+      const goUser=useCallback((u)=>{setScreenHistory(h=>[...h,screen]);setViewUser(u);setScreen('userprofile');window.scrollTo(0,0)},[screen]);
+      const goBack=useCallback(()=>{setScreenHistory(h=>{const c=[...h];const prev=c.pop()||'home';setScreen(prev);return c});window.scrollTo(0,0)},[]);
 
-      const publishPost=useCallback((taRef)=>{
+      const publishPost=useCallback((taRef,mediaArr)=>{
         const txt=taRef&&taRef.current?taRef.current.value:'';
-        if(!txt.trim())return;
+        const hasMedia=mediaArr&&mediaArr.length>0;
+        if(!txt.trim()&&!hasMedia)return;
         const b=postBook;
         const ch=b?(postChapter==='geral'?'geral':parseInt(postChapter)):'geral';
-        const newPost={id:Date.now(),user:currentUser,book:b||{title:'Geral',cover:''},chapter:ch,text:txt,spoiler,likes:0,replies:0,time:'agora'};
+        const newPost={id:Date.now(),user:currentUser,book:b||{title:'Geral',cover:''},chapter:ch,text:txt,spoiler,likes:0,replies:0,time:'agora',media:hasMedia?mediaArr:[]};
         setFeedPosts(prev=>[newPost,...prev]);
         if(taRef&&taRef.current)taRef.current.value='';
         setSpoiler(false);setPostChapter('geral');setPostBook(null);
