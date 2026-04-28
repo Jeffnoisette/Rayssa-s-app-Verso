@@ -1235,7 +1235,9 @@
     /* ═══════ DESKTOP SIDEBAR ═══════ */
     const Sidebar = () => {
       const {screen,go}=useApp();
-      const navItems=[{id:'home',icon:'home',label:'Home'},{id:'busca',icon:'search',label:'Busca'},{id:'estante',icon:'book-open',label:'Estante'},{id:'messages',icon:'mail',label:'Mensagens'},{id:'notifications',icon:'bell',label:'Notificações'},{id:'perfil',icon:'user',label:'Perfil'},{id:'settings',icon:'settings',label:'Configurações'}];
+      const unreadCount=sampleNotifications.filter(n=>!n.read).length;
+      const dmUnread=sampleConversations.reduce((s,c)=>s+c.unread,0);
+      const navItems=[{id:'home',icon:'home',label:'Home'},{id:'busca',icon:'search',label:'Busca'},{id:'estante',icon:'book-open',label:'Estante'},{id:'messages',icon:'mail',label:'Mensagens',badge:dmUnread},{id:'notifications',icon:'bell',label:'Notificações',badge:unreadCount},{id:'perfil',icon:'user',label:'Perfil'},{id:'settings',icon:'settings',label:'Configurações'}];
       return (
         <aside className="desktop-sidebar">
           <div className="flex items-center gap-2 mb-8 px-2">
@@ -1243,8 +1245,8 @@
             <h1 className="text-xl font-display italic text-navy-500 font-bold">Verso</h1>
           </div>
           {navItems.map(t=>(
-            <div key={t.id} onClick={()=>go(t.id)} className={`nav-item ${screen===t.id?'active':''}`}>
-              <I name={t.icon} size={18}/>{t.label}
+            <div key={t.id} onClick={()=>go(t.id)} className={`nav-item ${screen===t.id?'active':''} relative`}>
+              <span className="relative"><I name={t.icon} size={18}/>{t.badge>0&&<span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 text-white text-[8px] font-bold rounded-full flex items-center justify-center">{t.badge}</span>}</span>{t.label}
             </div>
           ))}
           <div className="mt-auto pt-6 px-2">
